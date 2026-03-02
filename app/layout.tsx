@@ -3,10 +3,10 @@ import "./globals.css";
 import Header from "@/components/Header";
 
 export const metadata: Metadata = {
-  title: "Greenhouse OS | AirOps",
+  title: "Greenhouse OS",
   description: "Internal brand tools hub for AirOps",
   openGraph: {
-    title: "Greenhouse OS | AirOps",
+    title: "Greenhouse OS",
     description: "Internal brand tools hub for AirOps",
     images: [{ url: "/og-image.jpg", width: 1200, height: 630 }],
   },
