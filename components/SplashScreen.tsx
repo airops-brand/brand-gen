@@ -40,7 +40,7 @@ export default function SplashScreen({ onDone }: { onDone: () => void }) {
           loop={false}
           autoplay={true}
           onComplete={handleComplete}
-          style={{ width: '100%', maxWidth: 600 }}
+          style={{ width: '100%', height: '100%' }}
         />
       )}
     </div>
