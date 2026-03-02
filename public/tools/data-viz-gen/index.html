@@ -660,7 +660,6 @@ const paintingCache = {};
 function prefetchPaintings() {
   return Promise.all(PAINTINGS.map(p => new Promise(resolve => {
     const img = new Image();
-    img.crossOrigin = 'anonymous';
     img.onload = () => {
       const cv = document.createElement('canvas');
       cv.width = img.naturalWidth; cv.height = img.naturalHeight;
@@ -1042,7 +1041,7 @@ function buildSplitTitleSVG(title, panelW, H, titleColor) {
 function buildPaintingBackground(key, W, H, forExport) {
   const p = PAINTINGS.find(x => x.key === key);
   if (!p) return '';
-  const href = forExport ? (paintingCache[key] || p.file) : p.file;
+  const href = paintingCache[key] || p.file;
   const overlayAlpha = p.overlay;
   return `<image href="${href}" x="0" y="0" width="${W}" height="${H}" preserveAspectRatio="xMidYMid slice"/>
   <rect width="${W}" height="${H}" fill="rgba(0,0,0,${overlayAlpha})"/>`;
