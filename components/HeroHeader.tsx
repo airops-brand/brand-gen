@@ -27,7 +27,7 @@ export default function HeroHeader({ animate }: { animate: boolean }) {
             color: '#fff',
             fontFamily: "'Saans', sans-serif",
             fontWeight: 400,
-            fontSize: 'clamp(22px, 2.6vw, 40px)',
+            fontSize: 'clamp(32px, 4vw, 64px)',
             lineHeight: 1.35,
             maxWidth: '900px',
             opacity: animate ? undefined : 0,
