@@ -30,6 +30,15 @@ export const tools: Tool[] = [
     bgColor: '#000d05',
   },
   {
+    id: 'gtm-grab-bag',
+    name: 'Ye Old GTM Grab Bag',
+    description: 'Go-to-market asset generator for campaigns and launches',
+    tag: 'Enablement',
+    url: 'https://asset-generator-alpha.vercel.app/',
+    status: 'live',
+    bgColor: '#F8FFFA',
+  },
+  {
     id: 'style-guide',
     name: 'Style Guide',
     description: 'AirOps brand guidelines, colors, and typography',
