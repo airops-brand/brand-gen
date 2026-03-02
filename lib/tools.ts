@@ -34,8 +34,8 @@ export const tools: Tool[] = [
     name: 'Page360',
     description: 'Full-page brand and content audit tool',
     tag: 'Enablement',
-    url: '',
-    status: 'coming-soon',
+    url: 'https://page360.vercel.app',
+    status: 'live',
     bgColor: '#F8FFFA',
   },
   {
