@@ -1,3 +1,5 @@
+import Image from 'next/image'
+
 export default function Header() {
   return (
     <header
@@ -14,29 +16,16 @@ export default function Header() {
         zIndex: 40,
       }}
     >
-      {/* AirOps wordmark */}
-      <svg
-        width="90"
-        height="20"
-        viewBox="0 0 90 20"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        aria-label="AirOps"
-      >
-        <text
-          x="0"
-          y="16"
-          fontFamily="'Saans', sans-serif"
-          fontWeight="700"
-          fontSize="18"
-          fill="#001408"
-          letterSpacing="-0.5"
-        >
-          AirOps
-        </text>
-      </svg>
+      {/* AirOps logo */}
+      <Image
+        src="/logo-airops.svg"
+        alt="AirOps"
+        width={80}
+        height={26}
+        priority
+      />
 
-      {/* Right side: Brand Gen + separator + tagline */}
+      {/* Right side: Greenhouse OS + separator + tagline */}
       <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
         <span
           style={{
@@ -47,7 +36,7 @@ export default function Header() {
             letterSpacing: '0.02em',
           }}
         >
-          Brand Gen
+          Greenhouse OS
         </span>
         <span style={{ width: '1px', height: '16px', background: '#d4e8da', display: 'block' }} />
         <span
