@@ -1025,6 +1025,50 @@
   </div>
 
   <!-- Reference table -->
+  <!-- Step 9: Vercel preview -->
+  <div class="step">
+    <div class="step-header">
+      <div class="step-number">09</div>
+      <div class="step-title">See your work live with a Vercel preview</div>
+    </div>
+    <div class="step-body">
+      <p>Once you've asked Claude to build something - a landing page, a component, anything visual - you can get a real live URL to see it in the browser in about 30 seconds. This is one of the most satisfying parts of the whole setup.</p>
+      <p style="margin-top:8px">Just ask Claude to deploy it for you. Something like: <em>"Can you push this to Vercel so I can see a preview?"</em> It'll handle the commit, push, and deploy. Or run the command below yourself from your project folder.</p>
+    </div>
+
+    <div class="terminal">
+      <div class="terminal-bar">
+        <div class="terminal-dot dot-red"></div>
+        <div class="terminal-dot dot-yellow"></div>
+        <div class="terminal-dot dot-green"></div>
+        <div class="terminal-title">Terminal - zsh - your-project</div>
+      </div>
+      <div class="terminal-body">
+        <div class="terminal-line">
+          <span class="prompt">></span>
+          <span class="cmd" style="color:#e2e8f0">Can you build me a simple landing page for this project and push it to Vercel so I can see it?</span>
+        </div>
+        <div class="terminal-gap"></div>
+        <div class="output-line" style="color:#d1d5db">Building landing page... <span class="comment">(Claude writes the files)</span></div>
+        <div class="output-line" style="color:#d1d5db">Pushing to GitHub...</div>
+        <div class="output-line" style="color:#d1d5db">Deploying to Vercel...</div>
+        <div class="terminal-gap"></div>
+        <div class="output-line" style="color:#28ca41">Deployment complete.</div>
+        <div class="output-line"><span style="color:#7dd3fc">https://your-project-name.vercel.app</span> <span class="comment"># your live URL</span></div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <div class="callout-icon">🔗</div>
+      <div class="callout-text"><strong>The URL is real and shareable.</strong> Anyone with the link can open it in a browser - no login, no setup. This is what you send to Jess or your manager when you want to show off something you built. Every time you push new changes, Vercel automatically updates the same URL within about 60 seconds.</div>
+    </div>
+
+    <div class="callout" style="margin-top:12px;">
+      <div class="callout-icon">💡</div>
+      <div class="callout-text"><strong>First time deploying a project?</strong> Vercel might ask a couple of setup questions the first time (project name, which folder to deploy). Just press Enter to accept the defaults for all of them. After that first deploy, it remembers your settings and future deploys are one command.</div>
+    </div>
+  </div>
+
   <div class="section-title">Terminal quick reference</div>
 
   <table class="ref-table">
