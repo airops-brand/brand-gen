@@ -12,11 +12,11 @@ export type Tool = {
 
 export const tools: Tool[] = [
   {
-    id: 'data-viz-gen',
-    name: 'DataViz Gen',
-    description: 'Generate on-brand data visualizations and charts',
+    id: 'chartwiz',
+    name: 'Chartwiz',
+    description: 'Build on-brand data visualizations and charts',
     tag: 'Content',
-    url: '/tools/data-viz-gen/',
+    url: 'https://airops-chartwiz.vercel.app/',
     status: 'live',
     bgColor: '#F8FFFA',
   },
