@@ -4,6 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Claude Code Setup Guide</title>
+<meta property="og:title" content="Claude Code Setup Guide">
+<meta property="og:description" content="Never touched a terminal? That's fine. Follow this guide and you'll be up and running with Claude Code in about 30 minutes.">
+<meta property="og:image" content="/og-setup-guide.png">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="/og-setup-guide.png">
 <style>
   @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600&display=swap');
 
@@ -41,6 +47,26 @@
     background: var(--green-600);
     padding: 48px 64px 40px;
     border-bottom: 3px solid var(--interaction);
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 32px;
+    position: relative;
+    box-shadow: inset 0 -80px 160px rgba(0,255,100,0.06), inset 0 0 240px rgba(0,255,100,0.03);
+  }
+
+  .page-header-text {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .page-header-image {
+    flex-shrink: 0;
+    align-self: flex-end;
+    height: 180px;
+    width: auto;
+    display: block;
+    filter: drop-shadow(0 0 24px rgba(0,255,100,0.25)) drop-shadow(0 0 8px rgba(0,255,100,0.15));
   }
 
   .page-header .eyebrow {
@@ -535,16 +561,27 @@
 
   @media print {
     .content { padding: 32px; }
-    .page-header { padding: 32px; }
+    .page-header {
+      padding: 32px;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 16px;
+    }
+    .page-header-image {
+      height: 120px;
+    }
   }
 </style>
 </head>
 <body>
 
 <div class="page-header">
-  <div class="eyebrow">Internal Guide // Engineering Setup</div>
-  <h1>Getting set up on<br>Claude Code</h1>
-  <div class="subtitle">Never touched a terminal? Never written code? That's fine - this guide is written for you. Follow each step in order and you'll be up and running in about 30 minutes.</div>
+  <div class="page-header-text">
+    <div class="eyebrow">Internal Guide // Engineering Setup</div>
+    <h1>Getting set up on<br>Claude Code</h1>
+    <div class="subtitle">Never touched a terminal? Never written code? That's fine - this guide is written for you. Follow each step in order and you'll be up and running in about 30 minutes.</div>
+  </div>
+  <img src="/pez-dispenser.png" alt="" class="page-header-image" aria-hidden="true">
 </div>
 
 <div class="content">
