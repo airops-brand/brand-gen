@@ -836,6 +836,104 @@
     </div>
   </div>
 
+  <!-- Step 6b: Create a GitHub repo -->
+  <div class="step">
+    <div class="step-header">
+      <div class="step-number">6b</div>
+      <div class="step-title">Create a GitHub repository for your project</div>
+    </div>
+    <div class="step-body">
+      <p>Every new project you build gets its own repository (called a "repo") on GitHub. Think of a repo like a project folder that lives in the cloud and tracks every change you've ever made. You'll create a new one each time you start something new.</p>
+      <p style="margin-top:8px">Here's how to create one and connect it to your Mac in three steps.</p>
+    </div>
+
+    <div style="margin: 0 0 20px 64px; border: 1px solid var(--stroke-green); overflow: hidden;">
+      <!-- Step A -->
+      <div style="display:flex;gap:20px;padding:20px 24px;border-bottom:1px solid var(--stroke-green);align-items:flex-start;">
+        <div style="font-family:var(--font-mono);font-size:11px;font-weight:500;letter-spacing:0.08em;background:var(--near-black);color:var(--interaction);padding:5px 10px;flex-shrink:0;min-width:32px;text-align:center;">A</div>
+        <div>
+          <div style="font-family:Georgia,serif;font-size:17px;font-weight:400;color:var(--near-black);margin-bottom:6px;">Create the repo on github.com</div>
+          <p style="font-size:14px;color:var(--text-secondary);line-height:1.6;">Go to <a href="https://github.com/new" target="_blank" style="color:var(--green-500);text-decoration:none;border-bottom:1px solid var(--green-200);">github.com/new</a> (or click the <strong>+</strong> in the top-right corner of GitHub and choose "New repository"). Give it a name - keep it short, lowercase, and use hyphens instead of spaces (e.g. <code style="font-family:var(--font-mono);font-size:12px;background:#f3f4f6;padding:2px 5px;">my-project</code>). Leave everything else as the default and click <strong>Create repository</strong>.</p>
+        </div>
+      </div>
+      <!-- Step B -->
+      <div style="display:flex;gap:20px;padding:20px 24px;border-bottom:1px solid var(--stroke-green);align-items:flex-start;">
+        <div style="font-family:var(--font-mono);font-size:11px;font-weight:500;letter-spacing:0.08em;background:var(--near-black);color:var(--interaction);padding:5px 10px;flex-shrink:0;min-width:32px;text-align:center;">B</div>
+        <div>
+          <div style="font-family:Georgia,serif;font-size:17px;font-weight:400;color:var(--near-black);margin-bottom:6px;">Clone it to your Mac</div>
+          <p style="font-size:14px;color:var(--text-secondary);line-height:1.6;">"Cloning" means downloading a copy of the repo onto your Mac so you can work on it locally. GitHub will show you the exact command to run after you create the repo - copy the one under <strong>"...or create a new repository on the command line"</strong> and run it in Terminal. It looks like this (with your actual username and repo name):</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="terminal">
+      <div class="terminal-bar">
+        <div class="terminal-dot dot-red"></div>
+        <div class="terminal-dot dot-yellow"></div>
+        <div class="terminal-dot dot-green"></div>
+        <div class="terminal-title">Terminal - zsh</div>
+      </div>
+      <div class="terminal-body">
+        <div class="terminal-line">
+          <span class="prompt">$</span>
+          <span class="cmd">git clone git@github.com:<span class="string">your-username/your-repo-name</span>.git</span>
+        </div>
+        <div class="output-line">Cloning into 'your-repo-name'...</div>
+        <div class="output-line" style="color:#28ca41">done.</div>
+        <div class="terminal-gap"></div>
+        <div class="terminal-line">
+          <span class="prompt">$</span>
+          <span class="cmd">cd <span class="path">your-repo-name</span> <span class="comment"># move into the project folder</span></span>
+        </div>
+        <div class="terminal-line">
+          <span class="prompt">$</span>
+          <span class="cmd">claude <span class="comment"># start Claude Code in this folder</span></span>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin: 20px 0 0 64px; border: 1px solid var(--stroke-green); overflow: hidden;">
+      <!-- Step C -->
+      <div style="display:flex;gap:20px;padding:20px 24px;align-items:flex-start;">
+        <div style="font-family:var(--font-mono);font-size:11px;font-weight:500;letter-spacing:0.08em;background:var(--near-black);color:var(--interaction);padding:5px 10px;flex-shrink:0;min-width:32px;text-align:center;">C</div>
+        <div>
+          <div style="font-family:Georgia,serif;font-size:17px;font-weight:400;color:var(--near-black);margin-bottom:6px;">Save your work (push to GitHub)</div>
+          <p style="font-size:14px;color:var(--text-secondary);line-height:1.6;">When Claude makes changes you like, you'll want to save them back to GitHub. Claude Code can do this for you - just ask it: <em>"commit and push my changes"</em>. Or you can do it manually with the three commands below. You'll do this often, so it becomes second nature quickly.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="terminal">
+      <div class="terminal-bar">
+        <div class="terminal-dot dot-red"></div>
+        <div class="terminal-dot dot-yellow"></div>
+        <div class="terminal-dot dot-green"></div>
+        <div class="terminal-title">Terminal - zsh - your-repo-name</div>
+      </div>
+      <div class="terminal-body">
+        <div class="terminal-line">
+          <span class="prompt">$</span>
+          <span class="cmd">git add <span class="flag">-A</span> <span class="comment"># stage all changes</span></span>
+        </div>
+        <div class="terminal-line">
+          <span class="prompt">$</span>
+          <span class="cmd">git commit <span class="flag">-m</span> <span class="string">"describe what you changed"</span></span>
+        </div>
+        <div class="terminal-line">
+          <span class="prompt">$</span>
+          <span class="cmd">git push</span>
+        </div>
+        <div class="output-line" style="color:#28ca41">To github.com:your-username/your-repo-name.git</div>
+        <div class="output-line" style="color:#28ca41">   main -> main <span class="comment"># your changes are now saved on GitHub</span></div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <div class="callout-icon">💡</div>
+      <div class="callout-text"><strong>You'll create a new repo for every project.</strong> One project = one repo. If you're spinning up something new, always start by creating a fresh repo on GitHub first, then clone it. This keeps everything organized and means you'll never lose work.</div>
+    </div>
+  </div>
+
   <!-- Step 7: Vercel -->
   <div class="step">
     <div class="step-header">
