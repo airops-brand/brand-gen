@@ -1177,13 +1177,26 @@
         <div style="font-family:Georgia,serif;font-size:22px;font-weight:400;color:var(--near-black);margin-bottom:12px;letter-spacing:-0.01em;">Load AirOps brand context into Claude Code</div>
         <p style="font-size:14px;color:var(--text-secondary);line-height:1.65;margin-bottom:12px;">This zip contains a set of files you drop into your project that teach Claude Code about AirOps brand - our colors, fonts, tone of voice, component patterns, and design rules. Once it's in place, Claude will follow the brand automatically without you having to describe it every time.</p>
         <p style="font-size:14px;color:var(--text-secondary);line-height:1.65;margin-bottom:20px;">It's like handing Claude a brand bible before every conversation.</p>
-        <a
-          href="/airops-brand-skill-files.zip"
-          download
-          style="display:inline-flex;align-items:center;gap:8px;padding:10px 20px;background:var(--near-black);color:var(--interaction);font-family:var(--font-mono);font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;border:1px solid var(--interaction);"
+        <button
+          id="brand-skill-download-btn"
+          onclick="(function(){
+            var pw = prompt('Enter password to download:');
+            if (pw === null) return;
+            if (pw === 'contextwindow') {
+              var a = document.createElement('a');
+              a.href = '/airops-brand-skill-files.zip';
+              a.download = 'airops-brand-skill-files.zip';
+              document.body.appendChild(a);
+              a.click();
+              document.body.removeChild(a);
+            } else {
+              alert('Incorrect password.');
+            }
+          })()"
+          style="display:inline-flex;align-items:center;gap:8px;padding:10px 20px;background:var(--near-black);color:var(--interaction);font-family:var(--font-mono);font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;border:1px solid var(--interaction);cursor:pointer;"
         >
           ↓ Download brand skill files
-        </a>
+        </button>
       </div>
       <div style="flex-shrink:0;background:var(--white);border:1px solid var(--stroke-green);padding:20px;min-width:220px;">
         <div style="font-family:var(--font-mono);font-size:10px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-secondary);margin-bottom:14px;">How to install</div>
