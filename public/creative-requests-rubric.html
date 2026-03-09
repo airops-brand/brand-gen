@@ -1029,6 +1029,12 @@ The "needs" array should be 3-5 specific things they need to submit with this re
     });
 
     const data = await response.json();
+    if (!response.ok) {
+      throw new Error(`API error ${response.status}: ${JSON.stringify(data)}`);
+    }
+    if (!data.content?.[0]?.text) {
+      throw new Error(`Unexpected response: ${JSON.stringify(data)}`);
+    }
     const raw = data.content[0].text.replace(/```json|```/g, '').trim();
     const result = JSON.parse(raw);
     lastClassification = { ...result, description: input };
@@ -1070,7 +1076,7 @@ The "needs" array should be 3-5 specific things they need to submit with this re
     resultDiv.style.display = 'block';
 
   } catch (err) {
-    errorDiv.textContent = 'Something went wrong classifying your request. Try again.';
+    errorDiv.textContent = 'Error: ' + (err.message || 'Something went wrong. Try again.');
     errorDiv.style.display = 'block';
   }
 
