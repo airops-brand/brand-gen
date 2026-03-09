@@ -31,6 +31,28 @@ export default function Header() {
       {/* Nav + right side */}
       <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
         <a
+          href="/creative-requests-rubric.html"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{
+            fontFamily: "'Saans Mono', monospace",
+            fontSize: '11px',
+            fontWeight: 500,
+            textTransform: 'uppercase',
+            letterSpacing: '0.08em',
+            color: '#008c44',
+            textDecoration: 'none',
+            padding: '4px 10px',
+            border: '1px solid #d4e8da',
+            transition: 'background 0.15s',
+          }}
+          onMouseEnter={(e) => (e.currentTarget.style.background = '#f0faf4')}
+          onMouseLeave={(e) => (e.currentTarget.style.background = 'transparent')}
+        >
+          Brand Team Process
+        </a>
+
+        <a
           href="/claude-code-setup-guide.html"
           target="_blank"
           rel="noopener noreferrer"

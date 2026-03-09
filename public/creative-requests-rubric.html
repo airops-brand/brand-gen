@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>#creative-requests — Process Rubric</title>
+<style>
+  @font-face {
+    font-family: 'Serrif VF';
+    src: url('SerrifVF.ttf') format('truetype');
+    font-weight: 100 900;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: 'Saans';
+    src: url('Saans-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: 'Saans';
+    src: url('Saans-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: 'Saans';
+    src: url('Saans-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: 'Saans Mono';
+    src: url('SaansMono-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --white: #ffffff;
+    --off-white: #F8FFFA;
+    --near-black: #000d05;
+    --green-50: #f8fffb;
+    --green-100: #dfeae3;
+    --green-200: #CCFFE0;
+    --green-500: #008c44;
+    --green-600: #002910;
+    --interaction: #00ff64;
+    --accent-label: #EEFF8C;
+    --text-primary: #09090b;
+    --text-secondary: #676c79;
+    --text-tertiary: #a5aab6;
+    --stroke: #ecedef;
+    --stroke-green: #d4e8da;
+  }
+
+  body {
+    background: var(--white);
+    color: var(--text-primary);
+    font-family: 'Saans', 'Helvetica Neue', sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    padding: 48px 32px;
+    max-width: 860px;
+    margin: 0 auto;
+  }
+
+  /* Header */
+  .doc-header {
+    border-bottom: 1px solid var(--stroke-green);
+    padding-bottom: 32px;
+    margin-bottom: 40px;
+  }
+
+  .channel-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--accent-label);
+    border: 1px solid var(--stroke-green);
+    padding: 4px 10px;
+    font-family: 'Saans Mono', 'DM Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--near-black);
+    margin-bottom: 16px;
+  }
+
+  h1 {
+    font-family: 'Serrif VF', Georgia, serif;
+    font-size: 42px;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+    color: var(--near-black);
+    margin-bottom: 12px;
+  }
+
+  .doc-meta {
+    font-size: 13px;
+    color: var(--text-secondary);
+    font-family: 'Saans Mono', 'DM Mono', monospace;
+    letter-spacing: 0.04em;
+  }
+
+  /* Section headers */
+  .section-label {
+    display: inline-flex;
+    align-items: center;
+    background: var(--accent-label);
+    border: 1px solid var(--stroke-green);
+    padding: 3px 10px;
+    font-family: 'Saans Mono', 'DM Mono', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--near-black);
+    margin-bottom: 16px;
+  }
+
+  h2 {
+    font-family: 'Serrif VF', Georgia, serif;
+    font-size: 26px;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    color: var(--near-black);
+    margin-bottom: 20px;
+  }
+
+  h3 {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    font-family: 'Saans Mono', 'DM Mono', monospace;
+    margin-bottom: 8px;
+  }
+
+  section { margin-bottom: 48px; }
+
+  /* Intro note */
+  .intro-note {
+    background: var(--off-white);
+    border: 1px solid var(--stroke-green);
+    border-left: 3px solid var(--green-500);
+    padding: 16px 20px;
+    margin-bottom: 40px;
+    font-size: 14px;
+    color: var(--text-primary);
+    line-height: 1.6;
+  }
+
+  /* Tier cards */
+  .tiers { display: flex; flex-direction: column; gap: 16px; }
+
+  .tier-card {
+    border: 1px solid var(--stroke-green);
+    background: var(--white);
+    padding: 24px 28px;
+    display: grid;
+    grid-template-columns: 180px 1fr 160px;
+    gap: 24px;
+    align-items: start;
+  }
+
+  .tier-card:hover { background: var(--green-50); }
+
+  .tier-label-col {}
+
+  .tier-badge {
+    display: inline-block;
+    background: var(--near-black);
+    color: var(--white);
+    font-family: 'Saans Mono', 'DM Mono', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    margin-bottom: 10px;
+  }
+
+  .tier-type {
+    font-family: 'Serrif VF', Georgia, serif;
+    font-size: 19px;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    color: var(--near-black);
+    line-height: 1.2;
+    margin-bottom: 6px;
+  }
+
+  .tier-examples {
+    font-size: 12px;
+    color: var(--text-secondary);
+    line-height: 1.5;
+  }
+
+  .tier-body { }
+
+  .tier-body p {
+    font-size: 14px;
+    color: var(--text-primary);
+    line-height: 1.6;
+    margin-bottom: 10px;
+  }
+
+  .tier-body p:last-child { margin-bottom: 0; }
+
+  .tier-timeline {
+    text-align: right;
+  }
+
+  .timeline-num {
+    font-family: 'Serrif VF', Georgia, serif;
+    font-size: 36px;
+    font-weight: 400;
+    color: var(--green-500);
+    line-height: 1;
+    margin-bottom: 2px;
+  }
+
+  .timeline-unit {
+    font-family: 'Saans Mono', 'DM Mono', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    margin-bottom: 10px;
+  }
+
+  .timeline-breakdown {
+    font-size: 11px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    text-align: right;
+  }
+
+  /* What to include */
+  .checklist {
+    border: 1px solid var(--stroke-green);
+    background: var(--white);
+  }
+
+  .checklist-item {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--stroke);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  .checklist-item:last-child { border-bottom: none; }
+
+  .check-icon {
+    flex-shrink: 0;
+    width: 18px;
+    height: 18px;
+    border: 1.5px solid var(--green-500);
+    margin-top: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .check-icon svg { width: 10px; height: 10px; }
+
+  .check-label { font-weight: 600; color: var(--near-black); }
+  .check-desc { color: var(--text-secondary); margin-top: 2px; font-size: 13px; }
+
+  /* Request types table */
+  .request-grid {
+    border: 1px solid var(--stroke-green);
+    background: var(--white);
+    overflow: hidden;
+  }
+
+  .rg-header {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    background: var(--near-black);
+    padding: 10px 20px;
+    gap: 16px;
+  }
+
+  .rg-header span {
+    font-family: 'Saans Mono', 'DM Mono', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--white);
+  }
+
+  .rg-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    padding: 12px 20px;
+    border-bottom: 1px solid var(--stroke);
+    gap: 16px;
+    align-items: center;
+  }
+
+  .rg-row:last-child { border-bottom: none; }
+  .rg-row:nth-child(even) { background: var(--green-50); }
+
+  .rg-type { font-size: 14px; font-weight: 500; color: var(--near-black); }
+  .rg-who {
+    font-size: 12px;
+    color: var(--text-secondary);
+    font-family: 'Saans Mono', 'DM Mono', monospace;
+  }
+  .rg-tier-pill {
+    display: inline-flex;
+    background: var(--accent-label);
+    border: 1px solid var(--stroke-green);
+    padding: 2px 8px;
+    font-family: 'Saans Mono', 'DM Mono', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--near-black);
+  }
+
+  .rg-tier-pill.t3 { background: var(--green-200); }
+  .rg-tier-pill.tspecial { background: var(--near-black); color: var(--white); }
+
+  /* Dos & don'ts */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+  .dos-card, .donts-card {
+    border: 1px solid var(--stroke-green);
+    padding: 20px;
+  }
+
+  .dos-card { border-top: 3px solid var(--green-500); }
+  .donts-card { border-top: 3px solid #e53e3e; }
+
+  .dd-header {
+    font-family: 'Saans Mono', 'DM Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+
+  .dos-card .dd-header { color: var(--green-500); }
+  .donts-card .dd-header { color: #e53e3e; }
+
+  .dd-item {
+    font-size: 13px;
+    color: var(--text-primary);
+    line-height: 1.5;
+    padding: 6px 0;
+    border-bottom: 1px solid var(--stroke);
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+  }
+
+  .dd-item:last-child { border-bottom: none; }
+
+  .dd-mark { flex-shrink: 0; margin-top: 1px; font-weight: 600; }
+  .dos-card .dd-mark { color: var(--green-500); }
+  .donts-card .dd-mark { color: #e53e3e; }
+
+  /* Footer */
+  .doc-footer {
+    border-top: 1px solid var(--stroke-green);
+    padding-top: 24px;
+    margin-top: 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-text {
+    font-family: 'Saans Mono', 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--text-tertiary);
+    letter-spacing: 0.04em;
+  }
+
+  .footer-logo {
+    font-family: 'Serrif VF', Georgia, serif;
+    font-size: 18px;
+    color: var(--near-black);
+    letter-spacing: -0.02em;
+  }
+
+  @media (max-width: 700px) {
+    .tier-card { grid-template-columns: 1fr; }
+    .rg-header, .rg-row { grid-template-columns: 1fr 1fr; }
+    .rg-header span:last-child, .rg-row .rg-tier-pill { display: none; }
+    .two-col { grid-template-columns: 1fr; }
+    h1 { font-size: 32px; }
+    .tier-timeline { text-align: left; }
+  }
+
+  /* ---- Classifier ---- */
+  .classifier-wrap {
+    margin-bottom: 48px;
+    padding: 28px 28px 24px;
+    border: 1px solid var(--stroke-green);
+    background: var(--off-white);
+  }
+
+  .classifier-sub {
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin-bottom: 20px;
+    line-height: 1.6;
+  }
+
+  .classifier-box {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+
+  .classifier-box textarea {
+    flex: 1;
+    padding: 12px 14px;
+    font-family: 'Saans', 'Helvetica Neue', sans-serif;
+    font-size: 14px;
+    color: var(--text-primary);
+    background: var(--white);
+    border: 1px solid var(--stroke-green);
+    border-radius: 0;
+    resize: vertical;
+    outline: none;
+    line-height: 1.6;
+    transition: border-color 0.15s;
+  }
+
+  .classifier-box textarea:focus {
+    border-color: var(--green-500);
+  }
+
+  .classifier-box button {
+    flex-shrink: 0;
+    padding: 12px 20px;
+    background: var(--near-black);
+    color: var(--white);
+    border: none;
+    font-family: 'Saans', 'Helvetica Neue', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background 0.15s;
+    min-width: 160px;
+    justify-content: center;
+  }
+
+  .classifier-box button:hover { background: #1a2e1a; }
+  .classifier-box button:disabled { opacity: 0.6; cursor: not-allowed; }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .spin-icon { animation: spin 0.8s linear infinite; }
+
+  #classifierResult {
+    margin-top: 20px;
+  }
+
+  .result-tier-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+
+  .result-tier-pill {
+    display: inline-flex;
+    padding: 4px 12px;
+    font-family: 'Saans Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .result-tier-pill.t1 { background: var(--accent-label); color: var(--near-black); border: 1px solid var(--stroke-green); }
+  .result-tier-pill.t2 { background: var(--green-200); color: var(--near-black); border: 1px solid var(--stroke-green); }
+  .result-tier-pill.t3 { background: var(--near-black); color: var(--white); }
+
+  .result-timeline-tag {
+    font-family: 'Saans Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    color: var(--green-500);
+    text-transform: uppercase;
+  }
+
+  .result-body-text {
+    font-size: 14px;
+    color: var(--text-primary);
+    line-height: 1.65;
+    margin-bottom: 16px;
+  }
+
+  .result-needs-header {
+    font-family: 'Saans Mono', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+  }
+
+  .result-needs-list {
+    list-style: none;
+    border: 1px solid var(--stroke-green);
+    background: var(--white);
+  }
+
+  .result-needs-list li {
+    font-size: 13px;
+    padding: 9px 14px;
+    border-bottom: 1px solid var(--stroke);
+    color: var(--text-primary);
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+  }
+
+  .result-needs-list li:last-child { border-bottom: none; }
+
+  .result-needs-list li::before {
+    content: "+";
+    color: var(--green-500);
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 0px;
+  }
+
+  .result-flag {
+    margin-top: 12px;
+    padding: 10px 14px;
+    background: #fff8f0;
+    border: 1px solid #f5d0a0;
+    border-left: 3px solid #e07b00;
+    font-size: 13px;
+    color: #7a4000;
+    line-height: 1.5;
+  }
+
+  .classifier-error {
+    margin-top: 16px;
+    padding: 12px 16px;
+    background: #fff5f5;
+    border: 1px solid #fed7d7;
+    border-left: 3px solid #e53e3e;
+    font-size: 13px;
+    color: #742a2a;
+  }
+
+</style>
+</head>
+<body>
+
+<div class="doc-header">
+  <div class="channel-tag">#creative-requests</div>
+  <h1>Creative Request<br>Process Rubric</h1>
+  <div class="doc-meta">Brand & Creative — Updated March 2026</div>
+</div>
+
+<div class="intro-note">
+  This rubric exists so everyone submitting requests knows what to expect — and the brand team can scope, prioritize, and deliver without the chaos. Lead times are the minimum. Rush requests without adequate lead time will be queued behind existing work.
+</div>
+
+<!-- TIER CLASSIFIER -->
+<div class="classifier-wrap">
+  <div class="section-label">Quick check</div>
+  <h2>What tier is my request?</h2>
+  <p class="classifier-sub">Describe what you need in plain language and we’ll tell you what tier it falls under, the lead time, and what to include in your submission.</p>
+
+  <div class="classifier-box">
+    <textarea id="classifierInput" placeholder="e.g. I need social graphics for our webinar next Thursday with two speakers, plus a landing page for the event..." rows="3"></textarea>
+    <button id="classifierBtn" onclick="classifyRequest()">
+      <span id="btnText">Classify my request</span>
+      <span id="btnSpinner" style="display:none;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="spin-icon"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+        Classifying...
+      </span>
+    </button>
+  </div>
+
+  <div id="classifierResult" style="display:none;"></div>
+  <div id="classifierError" style="display:none;" class="classifier-error"></div>
+</div>
+
+<!-- TIER 1 -->
+<section>
+  <div class="section-label">Part 01</div>
+  <h2>Request Tiers & Lead Times</h2>
+
+  <div class="tiers">
+
+    <div class="tier-card">
+      <div class="tier-label-col">
+        <div class="tier-badge">Tier 1</div>
+        <div class="tier-type">One-off assets</div>
+        <div class="tier-examples">Webinar promos, social posts, quote cards, templated graphics, email headers, blog headers, slide graphics</div>
+      </div>
+      <div class="tier-body">
+        <p>Single deliverables using existing brand templates. Includes social graphics (square, landscape, vertical), webinar creatives, quote cards, data viz, and any asset that doesn't require net-new design thinking.</p>
+        <p>Submit via the #creative-requests form with all copy, headshots, and specs finalized. Incomplete briefs restart the clock.</p>
+      </div>
+      <div class="tier-timeline">
+        <div class="timeline-num">3</div>
+        <div class="timeline-unit">business days</div>
+        <div class="timeline-breakdown">Submit with all assets<br>+ copy ready to go</div>
+      </div>
+    </div>
+
+    <div class="tier-card">
+      <div class="tier-label-col">
+        <div class="tier-badge">Tier 2</div>
+        <div class="tier-type">Templated landing pages</div>
+        <div class="tier-examples">Webinar LPs, gated asset pages, event pages, PPC pages using existing component library</div>
+      </div>
+      <div class="tier-body">
+        <p>Pages built using the existing Webflow component library and established page patterns. Copy must be finalized before design starts. Design and dev run sequentially -- design hands off to dev only when approved.</p>
+        <p>If copy is still in draft when you submit, design won't start until it's locked.</p>
+      </div>
+      <div class="tier-timeline">
+        <div class="timeline-num">4</div>
+        <div class="timeline-unit">business days</div>
+        <div class="timeline-breakdown">2 days design<br>2 days dev</div>
+      </div>
+    </div>
+
+    <div class="tier-card">
+      <div class="tier-label-col">
+        <div class="tier-badge">Tier 3</div>
+        <div class="tier-type">Custom landing pages</div>
+        <div class="tier-examples">Net-new page concepts, non-standard layouts, custom interactive sections, campaign-specific pages</div>
+      </div>
+      <div class="tier-body">
+        <p>Pages that require new design thinking -- custom layouts, new section patterns, or experiences that don't map to existing templates. These require a creative brief, copy sign-off, and a design review round before dev begins.</p>
+        <p>Bring these to Jess before submitting the formal request so scope can be validated against team capacity.</p>
+      </div>
+      <div class="tier-timeline">
+        <div class="timeline-num">5–7</div>
+        <div class="timeline-unit">business days</div>
+        <div class="timeline-breakdown">Brief + copy review<br>Design + revisions<br>Dev + QA</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- WHAT TO INCLUDE -->
+<section>
+  <div class="section-label">Part 02</div>
+  <h2>What every request needs</h2>
+
+  <div class="checklist">
+    <div class="checklist-item">
+      <div class="check-icon">
+        <svg viewBox="0 0 10 10" fill="none"><path d="M1.5 5.5L4 8L8.5 2.5" stroke="#008c44" stroke-width="1.5" stroke-linecap="square"/></svg>
+      </div>
+      <div>
+        <div class="check-label">Request type + tier</div>
+        <div class="check-desc">Know what you're asking for before you submit. "Can you make something for the webinar?" is not a brief.</div>
+      </div>
+    </div>
+    <div class="checklist-item">
+      <div class="check-icon">
+        <svg viewBox="0 0 10 10" fill="none"><path d="M1.5 5.5L4 8L8.5 2.5" stroke="#008c44" stroke-width="1.5" stroke-linecap="square"/></svg>
+      </div>
+      <div>
+        <div class="check-label">Final copy</div>
+        <div class="check-desc">All headline, body copy, CTAs, speaker names, and dates confirmed. Draft copy = paused project.</div>
+      </div>
+    </div>
+    <div class="checklist-item">
+      <div class="check-icon">
+        <svg viewBox="0 0 10 10" fill="none"><path d="M1.5 5.5L4 8L8.5 2.5" stroke="#008c44" stroke-width="1.5" stroke-linecap="square"/></svg>
+      </div>
+      <div>
+        <div class="check-label">Asset specs</div>
+        <div class="check-desc">Exact dimensions, format (PNG/SVG/Webflow), and destination (social, email, paid, web). Assume nothing.</div>
+      </div>
+    </div>
+    <div class="checklist-item">
+      <div class="check-icon">
+        <svg viewBox="0 0 10 10" fill="none"><path d="M1.5 5.5L4 8L8.5 2.5" stroke="#008c44" stroke-width="1.5" stroke-linecap="square"/></svg>
+      </div>
+      <div>
+        <div class="check-label">Reference links or files</div>
+        <div class="check-desc">Headshots, logos, example pages, Figma links, Notion briefs -- attach them at submission, not after.</div>
+      </div>
+    </div>
+    <div class="checklist-item">
+      <div class="check-icon">
+        <svg viewBox="0 0 10 10" fill="none"><path d="M1.5 5.5L4 8L8.5 2.5" stroke="#008c44" stroke-width="1.5" stroke-linecap="square"/></svg>
+      </div>
+      <div>
+        <div class="check-label">Hard deadline with context</div>
+        <div class="check-desc">"ASAP" is not a deadline. Tell us the publish date and why it's fixed -- that helps us prioritize accurately.</div>
+      </div>
+    </div>
+    <div class="checklist-item">
+      <div class="check-icon">
+        <svg viewBox="0 0 10 10" fill="none"><path d="M1.5 5.5L4 8L8.5 2.5" stroke="#008c44" stroke-width="1.5" stroke-linecap="square"/></svg>
+      </div>
+      <div>
+        <div class="check-label">One DRI per request</div>
+        <div class="check-desc">Every request needs a single person who owns feedback and approvals. Multiple stakeholders with contradictory feedback will be resolved by the DRI, not the design team.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REQUEST TYPES FROM CHANNEL -->
+<section>
+  <div class="section-label">Part 03</div>
+  <h2>Most common request types</h2>
+  <p style="font-size: 14px; color: var(--text-secondary); margin-bottom: 20px; line-height: 1.6;">Based on channel history. Use this as a guide when categorizing your own request.</p>
+
+  <div class="request-grid">
+    <div class="rg-header">
+      <span>Request type</span>
+      <span>Typically from</span>
+      <span>Tier</span>
+    </div>
+    <div class="rg-row">
+      <div class="rg-type">Webinar promo graphics (square, landscape, vertical)</div>
+      <div class="rg-who">Jim, Josh, Eoin</div>
+      <span class="rg-tier-pill">Tier 1 — 3 days</span>
+    </div>
+    <div class="rg-row">
+      <div class="rg-type">Social post / quote card assets</div>
+      <div class="rg-who">Ally, Eoin, Jordan</div>
+      <span class="rg-tier-pill">Tier 1 — 3 days</span>
+    </div>
+    <div class="rg-row">
+      <div class="rg-type">Paid social ad creatives (LinkedIn, Meta, X)</div>
+      <div class="rg-who">Jim, Julia</div>
+      <span class="rg-tier-pill">Tier 1 — 3 days</span>
+    </div>
+    <div class="rg-row">
+      <div class="rg-type">Customer story / case study assets (hero, quote, diagram)</div>
+      <div class="rg-who">Jordan</div>
+      <span class="rg-tier-pill">Tier 1 — 3 days</span>
+    </div>
+    <div class="rg-row">
+      <div class="rg-type">Blog / email header graphics</div>
+      <div class="rg-who">Josh, Julia</div>
+      <span class="rg-tier-pill">Tier 1 — 3 days</span>
+    </div>
+    <div class="rg-row">
+      <div class="rg-type">Data visualization / chart assets</div>
+      <div class="rg-who">Oshen, Josh</div>
+      <span class="rg-tier-pill">Tier 1 — 3 days</span>
+    </div>
+    <div class="rg-row">
+      <div class="rg-type">Slide / presentation graphic (deck inserts)</div>
+      <div class="rg-who">Eoin, Josh, Cyris</div>
+      <span class="rg-tier-pill">Tier 1 — 3 days</span>
+    </div>
+    <div class="rg-row">
+      <div class="rg-type">Event collateral (cards, signage, handouts)</div>
+      <div class="rg-who">Ally, Kendalle</div>
+      <span class="rg-tier-pill">Tier 1 — 3 days</span>
+    </div>
+    <div class="rg-row">
+      <div class="rg-type">Email template / HubSpot module</div>
+      <div class="rg-who">Julia, Katelyn</div>
+      <span class="rg-tier-pill">Tier 1–2</span>
+    </div>
+    <div class="rg-row">
+      <div class="rg-type">Webinar landing page (templated)</div>
+      <div class="rg-who">Jim, Josh</div>
+      <span class="rg-tier-pill t3">Tier 2 — 4 days</span>
+    </div>
+    <div class="rg-row">
+      <div class="rg-type">Gated asset / newsletter LP (templated)</div>
+      <div class="rg-who">Josh, Julia</div>
+      <span class="rg-tier-pill t3">Tier 2 — 4 days</span>
+    </div>
+    <div class="rg-row">
+      <div class="rg-type">PPC / paid landing page (existing template)</div>
+      <div class="rg-who">Julia, Jim</div>
+      <span class="rg-tier-pill t3">Tier 2 — 4 days</span>
+    </div>
+    <div class="rg-row">
+      <div class="rg-type">Compare / competitor LP (net-new)</div>
+      <div class="rg-who">Jim</div>
+      <span class="rg-tier-pill tspecial">Tier 3 — 5–7 days</span>
+    </div>
+    <div class="rg-row">
+      <div class="rg-type">New use-case or product page</div>
+      <div class="rg-who">Jordan, Josh</div>
+      <span class="rg-tier-pill tspecial">Tier 3 — 5–7 days</span>
+    </div>
+    <div class="rg-row">
+      <div class="rg-type">Campaign microsite / custom page concept</div>
+      <div class="rg-who">Ally, Jess</div>
+      <span class="rg-tier-pill tspecial">Tier 3 — 5–7 days</span>
+    </div>
+  </div>
+</section>
+
+<!-- DOS AND DON'TS -->
+<section>
+  <div class="section-label">Part 04</div>
+  <h2>How this works in practice</h2>
+
+  <div class="two-col">
+    <div class="dos-card">
+      <div class="dd-header">Do this</div>
+      <div class="dd-item"><span class="dd-mark">+</span><span>Submit via the #creative-requests form with all assets attached upfront</span></div>
+      <div class="dd-item"><span class="dd-mark">+</span><span>Include the publish/go-live date so we understand the actual constraint</span></div>
+      <div class="dd-item"><span class="dd-mark">+</span><span>Lock copy before submitting -- especially for landing pages</span></div>
+      <div class="dd-item"><span class="dd-mark">+</span><span>Batch related assets into one request when possible</span></div>
+      <div class="dd-item"><span class="dd-mark">+</span><span>Ping Jess for Tier 3 work before formally submitting to align on capacity</span></div>
+      <div class="dd-item"><span class="dd-mark">+</span><span>Give one round of consolidated feedback, not drip edits over days</span></div>
+    </div>
+    <div class="donts-card">
+      <div class="dd-header">Don't do this</div>
+      <div class="dd-item"><span class="dd-mark">–</span><span>DM the designers directly -- requests without a ticket don't get tracked or prioritized</span></div>
+      <div class="dd-item"><span class="dd-mark">–</span><span>Submit with "ASAP" as a deadline -- we need a real date</span></div>
+      <div class="dd-item"><span class="dd-mark">–</span><span>Submit with placeholder or draft copy and expect design to start</span></div>
+      <div class="dd-item"><span class="dd-mark">–</span><span>Ask for same-day or next-day turnaround on Tier 2–3 work</span></div>
+      <div class="dd-item"><span class="dd-mark">–</span><span>Change scope mid-ticket -- new ask = new ticket</span></div>
+      <div class="dd-item"><span class="dd-mark">–</span><span>Submit without an Asana task for anything Tier 2 or above</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- RECURRING / STANDING REQUESTS -->
+<section>
+  <div class="section-label">Part 05</div>
+  <h2>Recurring & standing needs</h2>
+  <p style="font-size: 14px; color: var(--text-secondary); margin-bottom: 20px; line-height: 1.6;">Some request types come up every week or every launch cycle. Templates exist for these -- use them.</p>
+
+  <div class="checklist">
+    <div class="checklist-item">
+      <div class="check-icon">
+        <svg viewBox="0 0 10 10" fill="none"><path d="M1.5 5.5L4 8L8.5 2.5" stroke="#008c44" stroke-width="1.5" stroke-linecap="square"/></svg>
+      </div>
+      <div>
+        <div class="check-label">Webinar graphics</div>
+        <div class="check-desc">Template exists for 1, 2, and 3 speakers. Square + landscape + vertical. Submit speaker headshots + bios with the request, not after.</div>
+      </div>
+    </div>
+    <div class="checklist-item">
+      <div class="check-icon">
+        <svg viewBox="0 0 10 10" fill="none"><path d="M1.5 5.5L4 8L8.5 2.5" stroke="#008c44" stroke-width="1.5" stroke-linecap="square"/></svg>
+      </div>
+      <div>
+        <div class="check-label">Customer story assets</div>
+        <div class="check-desc">Standard set: hero image, 2 quote cards, 1 diagram (before/after or workflow). Jordan owns these -- route via Jordan first.</div>
+      </div>
+    </div>
+    <div class="checklist-item">
+      <div class="check-icon">
+        <svg viewBox="0 0 10 10" fill="none"><path d="M1.5 5.5L4 8L8.5 2.5" stroke="#008c44" stroke-width="1.5" stroke-linecap="square"/></svg>
+      </div>
+      <div>
+        <div class="check-label">Paid social creative batches</div>
+        <div class="check-desc">Jim submits these in batches (2 concepts per 2-week sprint). That cadence is the right model -- avoid one-off ad requests unless urgent.</div>
+      </div>
+    </div>
+    <div class="checklist-item">
+      <div class="check-icon">
+        <svg viewBox="0 0 10 10" fill="none"><path d="M1.5 5.5L4 8L8.5 2.5" stroke="#008c44" stroke-width="1.5" stroke-linecap="square"/></svg>
+      </div>
+      <div>
+        <div class="check-label">Email templates</div>
+        <div class="check-desc">HubSpot modules exist for product launches, webinar promos, reports, events, and asset distribution. Check with Julia before requesting a net-new template.</div>
+      </div>
+    </div>
+    <div class="checklist-item">
+      <div class="check-icon">
+        <svg viewBox="0 0 10 10" fill="none"><path d="M1.5 5.5L4 8L8.5 2.5" stroke="#008c44" stroke-width="1.5" stroke-linecap="square"/></svg>
+      </div>
+      <div>
+        <div class="check-label">Webinar landing pages</div>
+        <div class="check-desc">Templated in Webflow -- 1, 2, and 3 speaker variants exist. Need HubSpot form? Account for that at submission; retrofitting adds a day.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="doc-footer">
+  <div class="footer-text">Questions? Ping Jess in #brand-team</div>
+  <div class="footer-logo">AirOps</div>
+</div>
+
+
+<script>
+async function classifyRequest() {
+  const input = document.getElementById('classifierInput').value.trim();
+  if (!input) return;
+
+  const btn = document.getElementById('classifierBtn');
+  const btnText = document.getElementById('btnText');
+  const btnSpinner = document.getElementById('btnSpinner');
+  const resultDiv = document.getElementById('classifierResult');
+  const errorDiv = document.getElementById('classifierError');
+
+  btn.disabled = true;
+  btnText.style.display = 'none';
+  btnSpinner.style.display = 'flex';
+  resultDiv.style.display = 'none';
+  errorDiv.style.display = 'none';
+
+  const systemPrompt = `You are a creative request classifier for AirOps Brand & Creative team. 
+Given a description of a creative request, classify it into one of three tiers and return ONLY valid JSON.
+
+Tier definitions:
+- Tier 1: One-off assets (3 business days). Single deliverables using existing templates: social graphics, webinar promo graphics, quote cards, data viz, blog/email headers, slide inserts, event collateral, paid ad creatives, email template updates.
+- Tier 2: Templated landing pages (4 business days: 2 design + 2 dev). Pages built with existing Webflow component library: webinar LPs, gated asset pages, newsletter pages, PPC/paid landing pages, event pages. Copy must be finalized first.
+- Tier 3: Custom landing pages (5-7 business days). Net-new design thinking required: custom layouts, new page concepts, use-case pages, campaign microsites, competitor/compare pages that don't follow existing templates.
+
+Return JSON in this exact format (no markdown, no backticks, just raw JSON):
+{
+  "tier": 1,
+  "type": "Short name for the request type",
+  "timeline": "3 business days",
+  "summary": "1-2 sentences explaining why this is the tier it is, specific to their request.",
+  "needs": ["item 1", "item 2", "item 3", "item 4"],
+  "flag": "Optional warning if something in the request might cause delays or scope issues. Null if none."
+}
+
+The "needs" array should be 3-5 specific things they need to submit with this request (copy, headshots, specs, brief, etc.) tailored to their specific ask.`;
+
+  try {
+    const response = await fetch("https://api.anthropic.com/v1/messages", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        model: "claude-sonnet-4-20250514",
+        max_tokens: 1000,
+        system: systemPrompt,
+        messages: [{ role: "user", content: input }]
+      })
+    });
+
+    const data = await response.json();
+    const raw = data.content[0].text.replace(/```json|```/g, '').trim();
+    const result = JSON.parse(raw);
+
+    const tierClass = result.tier === 1 ? 't1' : result.tier === 2 ? 't2' : 't3';
+    const tierLabel = result.tier === 1 ? 'Tier 1' : result.tier === 2 ? 'Tier 2' : 'Tier 3';
+
+    let html = `
+      <div class="result-tier-header">
+        <span class="result-tier-pill ${tierClass}">${tierLabel} — ${result.type}</span>
+        <span class="result-timeline-tag">${result.timeline}</span>
+      </div>
+      <p class="result-body-text">${result.summary}</p>
+      <div class="result-needs-header">What to include in your submission</div>
+      <ul class="result-needs-list">
+        ${result.needs.map(n => `<li>${n}</li>`).join('')}
+      </ul>
+    `;
+
+    if (result.flag) {
+      html += `<div class="result-flag"><strong>Heads up:</strong> ${result.flag}</div>`;
+    }
+
+    resultDiv.innerHTML = html;
+    resultDiv.style.display = 'block';
+
+  } catch (err) {
+    errorDiv.textContent = 'Something went wrong classifying your request. Try again.';
+    errorDiv.style.display = 'block';
+  }
+
+  btn.disabled = false;
+  btnText.style.display = 'inline';
+  btnSpinner.style.display = 'none';
+}
+
+document.getElementById('classifierInput').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) classifyRequest();
+});
+</script>
+
+</body>
+</html>
