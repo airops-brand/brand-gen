@@ -12,6 +12,15 @@ export type Tool = {
 
 export const tools: Tool[] = [
   {
+    id: 'slide-gen',
+    name: 'Slide Gen',
+    description: 'Build on-brand presentation slides and decks',
+    tag: 'Content',
+    url: 'https://slide-gen.vercel.app/',
+    status: 'live',
+    bgColor: '#F8FFFA',
+  },
+  {
     id: 'chartwiz',
     name: 'Chartwiz',
     description: 'Build on-brand data visualizations and charts',
