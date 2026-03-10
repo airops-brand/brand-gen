@@ -16,7 +16,7 @@ export const tools: Tool[] = [
     name: 'Chartwiz',
     description: 'Build on-brand data visualizations and charts',
     tag: 'Content',
-    url: 'https://airops-chartwiz.vercel.app/',
+    url: 'https://data-viz-gen.vercel.app/',
     status: 'live',
     bgColor: '#F8FFFA',
   },
