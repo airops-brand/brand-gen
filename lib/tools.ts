@@ -16,7 +16,7 @@ export const tools: Tool[] = [
     name: 'Slide Gen',
     description: 'Build on-brand presentation slides and decks',
     tag: 'Content',
-    url: 'https://slide-gen.vercel.app/',
+    url: 'https://slide-gen-phi.vercel.app/',
     status: 'live',
     bgColor: '#F8FFFA',
   },
