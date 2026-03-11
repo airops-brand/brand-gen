@@ -669,6 +669,259 @@
     color: #742a2a;
   }
 
+  /* ---- Chat Widget ---- */
+  #chatWidget {
+    position: fixed;
+    bottom: 28px;
+    right: 28px;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 12px;
+  }
+
+  #chatPanel {
+    width: 360px;
+    background: var(--white);
+    border: 1px solid var(--stroke-green);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    max-height: 520px;
+  }
+
+  .chat-header {
+    background: var(--near-black);
+    padding: 14px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+  }
+
+  .chat-header-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .chat-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--interaction);
+    border-radius: 50%;
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  .chat-header-title {
+    font-family: 'Saans Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--white);
+  }
+
+  .chat-header-sub {
+    font-size: 11px;
+    color: rgba(255,255,255,0.45);
+    font-family: 'Saans Mono', monospace;
+    letter-spacing: 0.03em;
+  }
+
+  .chat-close-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: rgba(255,255,255,0.5);
+    padding: 2px;
+    display: flex;
+    align-items: center;
+    transition: color 0.15s;
+  }
+
+  .chat-close-btn:hover { color: var(--white); }
+
+  .chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    min-height: 0;
+  }
+
+  .chat-msg {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    max-width: 90%;
+  }
+
+  .chat-msg.user { align-self: flex-end; align-items: flex-end; }
+  .chat-msg.assistant { align-self: flex-start; align-items: flex-start; }
+
+  .chat-bubble {
+    padding: 10px 14px;
+    font-size: 13px;
+    line-height: 1.55;
+    border: 1px solid var(--stroke-green);
+  }
+
+  .chat-msg.user .chat-bubble {
+    background: var(--near-black);
+    color: var(--white);
+    border-color: var(--near-black);
+  }
+
+  .chat-msg.assistant .chat-bubble {
+    background: var(--off-white);
+    color: var(--text-primary);
+  }
+
+  .chat-bubble strong { font-weight: 600; }
+  .chat-bubble ul { margin: 6px 0 0 16px; }
+  .chat-bubble li { margin-bottom: 3px; }
+
+  .chat-typing {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+    padding: 10px 14px;
+    background: var(--off-white);
+    border: 1px solid var(--stroke-green);
+    align-self: flex-start;
+  }
+
+  .chat-typing span {
+    width: 5px;
+    height: 5px;
+    background: var(--text-tertiary);
+    border-radius: 50%;
+    animation: bounce 1.2s ease-in-out infinite;
+  }
+
+  .chat-typing span:nth-child(2) { animation-delay: 0.2s; }
+  .chat-typing span:nth-child(3) { animation-delay: 0.4s; }
+
+  @keyframes bounce {
+    0%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-5px); }
+  }
+
+  .chat-input-row {
+    border-top: 1px solid var(--stroke-green);
+    padding: 12px;
+    display: flex;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+
+  .chat-input-row textarea {
+    flex: 1;
+    padding: 9px 12px;
+    font-family: 'Saans', sans-serif;
+    font-size: 13px;
+    color: var(--text-primary);
+    background: var(--white);
+    border: 1px solid var(--stroke-green);
+    resize: none;
+    outline: none;
+    line-height: 1.5;
+    transition: border-color 0.15s;
+    max-height: 100px;
+    overflow-y: auto;
+  }
+
+  .chat-input-row textarea:focus { border-color: var(--green-500); }
+
+  .chat-send-btn {
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    background: var(--near-black);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    transition: background 0.15s;
+    align-self: flex-end;
+  }
+
+  .chat-send-btn:hover { background: var(--green-500); }
+  .chat-send-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+  #chatToggleBtn {
+    width: 52px;
+    height: 52px;
+    background: var(--near-black);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+    transition: background 0.15s;
+    flex-shrink: 0;
+  }
+
+  #chatToggleBtn:hover { background: var(--green-500); }
+
+  .chat-unread-dot {
+    position: absolute;
+    top: -3px;
+    right: -3px;
+    width: 10px;
+    height: 10px;
+    background: var(--interaction);
+    border-radius: 50%;
+    border: 2px solid var(--white);
+  }
+
+  #chatToggleBtn { position: relative; }
+
+  .chat-suggestions {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 0 16px 4px;
+  }
+
+  .chat-suggestion {
+    background: none;
+    border: 1px solid var(--stroke-green);
+    padding: 8px 12px;
+    font-family: 'Saans', sans-serif;
+    font-size: 12px;
+    color: var(--text-secondary);
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.15s;
+    line-height: 1.4;
+  }
+
+  .chat-suggestion:hover {
+    background: var(--green-50);
+    border-color: var(--green-500);
+    color: var(--text-primary);
+  }
+
+  @media (max-width: 500px) {
+    #chatPanel { width: calc(100vw - 32px); }
+    #chatWidget { bottom: 16px; right: 16px; }
+  }
+
 </style>
 </head>
 <body>
@@ -1077,6 +1330,50 @@
 </div>
 
 
+<!-- CHAT WIDGET -->
+<div id="chatWidget">
+  <div id="chatPanel" style="display:none;">
+    <div class="chat-header">
+      <div class="chat-header-left">
+        <div class="chat-dot"></div>
+        <div>
+          <div class="chat-header-title">Process Assistant</div>
+          <div class="chat-header-sub">Ask anything about creative requests</div>
+        </div>
+      </div>
+      <button class="chat-close-btn" onclick="toggleChat()" aria-label="Close">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+
+    <div class="chat-messages" id="chatMessages">
+      <div class="chat-msg assistant">
+        <div class="chat-bubble">Hey! I can answer questions about the creative request process, help you figure out what tier your project is, or explain what to include in your submission. What do you need?</div>
+      </div>
+    </div>
+
+    <div class="chat-suggestions" id="chatSuggestions">
+      <button class="chat-suggestion" onclick="sendSuggestion(this)">What's the difference between a Tier 1 and Tier 2 web project?</button>
+      <button class="chat-suggestion" onclick="sendSuggestion(this)">My deadline is next week — is that enough lead time?</button>
+      <button class="chat-suggestion" onclick="sendSuggestion(this)">Do I need a brief for a webinar landing page?</button>
+    </div>
+
+    <div class="chat-input-row">
+      <textarea id="chatInput" placeholder="Ask about the process..." rows="1" onkeydown="handleChatKey(event)" oninput="autoResize(this)"></textarea>
+      <button class="chat-send-btn" id="chatSendBtn" onclick="sendChatMessage()" aria-label="Send">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 2L11 13M22 2L15 22L11 13L2 9L22 2z"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <button id="chatToggleBtn" onclick="toggleChat()" aria-label="Open process assistant">
+    <span id="chatToggleIcon">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+    </span>
+    <div class="chat-unread-dot" id="chatUnreadDot"></div>
+  </button>
+</div>
+
 <script>
 // Store last result globally so the CTA can access it
 let lastClassification = null;
@@ -1251,6 +1548,180 @@ async function sendToSlack() {
 document.getElementById('classifierInput').addEventListener('keydown', function(e) {
   if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) classifyRequest();
 });
+
+// ---- Chat ----
+const CHAT_SYSTEM_PROMPT = `You are the AirOps Brand & Creative process assistant, embedded in the Creative Request Process Rubric page. Your job is to help marketing partners understand the process, figure out what tier their project is, and know what to include in their submission.
+
+Here is the full process knowledge you have:
+
+CREATIVE REQUEST SIZES (for general creative work — graphics, assets, etc.):
+- Small Ask (~3 business days): One-off assets using existing templates. Social graphics, webinar promo graphics (square/landscape/vertical), quote cards, data viz, blog/email headers, slide inserts, event collateral, paid ad creatives, email template updates. Submit via #creative-requests form with all copy, headshots, and specs finalized.
+- Medium Ask (~4 business days — 2 design + 2 dev): Pages built with existing Webflow component library. Webinar LPs, gated asset pages, newsletter pages, PPC/paid landing pages, event pages. Copy must be finalized before design starts. Design and dev run sequentially.
+- Big Ask (6+ business days): Net-new design thinking required. Custom layouts, new page concepts, use-case pages, campaign microsites, competitor/compare pages. Requires a creative brief, copy sign-off, and design review. Bring to Jess before submitting.
+
+WEB PROJECT TIERS (for web builds specifically):
+- Tier 1 — Complex build (2–3 weeks): New, complex builds. New CMS collection/hub, complex campaign experience with custom interactions, major redesign. Examples: Use case hub, archetype quiz, blog redesign, resource center, interactive tools, campaign microsites, new product/solution pages. Requires full Tier 1 project brief in Notion and alignment with Jess before anything moves to Asana.
+- Tier 2 — Moderate lift (1–2 weeks): Templated/repeatable work. New page from existing template, new CMS entry (customer story, blog post, webinar page), section addition to existing page, campaign page refresh. Can move with Slack request + Asana ticket. Copy must be finalized before design starts.
+- Tier 3 — Simple update (1–3 days): Copy/CTA updates, asset swaps, content refreshes, SEO metadata updates, bug/link fixes. No design or dev needed. Must run through Tier 3 checklist before publishing.
+
+WHAT EVERY REQUEST NEEDS:
+1. Request type + size — know what you're asking for before you submit
+2. Final copy — all headline, body copy, CTAs, speaker names, and dates confirmed. Draft copy = paused project.
+3. Asset specs — exact dimensions, format (PNG/SVG/Webflow), and destination
+4. Reference links or files — headshots, logos, example pages, Figma links, Notion briefs — attach at submission
+5. Hard deadline with context — "ASAP" is not a deadline. Give the publish date and why it's fixed.
+6. One DRI per request — single person who owns feedback and approvals
+
+COMMON REQUEST TYPES & SIZES:
+- Webinar promo graphics: Small Ask (~3 days)
+- Social post / quote card assets: Small Ask (~3 days)
+- Paid social ad creatives: Small Ask (~3 days)
+- Customer story assets: Small Ask (~3 days)
+- Blog/email header graphics: Small Ask (~3 days)
+- Data visualization / chart assets: Small Ask (~3 days)
+- Slide/presentation graphics: Small Ask (~3 days)
+- Event collateral: Small Ask (~3 days)
+- Email template / HubSpot module: Small–Medium Ask
+- Webinar landing page (templated): Medium Ask (~4 days)
+- Gated asset / newsletter LP (templated): Medium Ask (~4 days)
+- PPC / paid landing page (existing template): Medium Ask (~4 days)
+- Compare / competitor LP (net-new): Big Ask (6+ days)
+- New use-case or product page: Big Ask (6+ days)
+- Campaign microsite / custom page concept: Big Ask (6+ days)
+
+DOs:
+- Submit via the #creative-requests form with all assets attached upfront
+- Include the publish/go-live date
+- Lock copy before submitting — especially for landing pages
+- Batch related assets into one request when possible
+- Ping Jess for Tier 3/Big Ask work before formally submitting
+- Give one round of consolidated feedback, not drip edits
+
+DON'Ts:
+- DM designers directly — requests without a ticket don't get tracked or prioritized
+- Submit with "ASAP" as a deadline
+- Submit with draft copy and expect design to start
+- Ask for same-day or next-day turnaround on Medium or Big Ask work
+- Change scope mid-ticket — new ask = new ticket
+- Submit without an Asana task for anything Medium Ask or above
+
+RECURRING TEMPLATES THAT EXIST:
+- Webinar graphics: Template for 1, 2, and 3 speakers. Square + landscape + vertical.
+- Customer story assets: Standard set — hero image, 2 quote cards, 1 diagram
+- Paid social creative batches: Jim submits in batches (2 concepts per 2-week sprint)
+- Email templates: HubSpot modules for product launches, webinar promos, reports, events, asset distribution
+- Webinar landing pages: Templated in Webflow — 1, 2, and 3 speaker variants
+
+TONE: Be helpful, direct, and conversational. Give clear, actionable answers. Don't be overly formal. If something is missing from the request or unclear, ask a clarifying question. Keep responses concise — bullet points are fine. Don't make up information not listed above.`;
+
+let chatHistory = [];
+let chatOpen = false;
+
+function toggleChat() {
+  chatOpen = !chatOpen;
+  const panel = document.getElementById('chatPanel');
+  const unread = document.getElementById('chatUnreadDot');
+  panel.style.display = chatOpen ? 'flex' : 'none';
+  if (chatOpen) {
+    unread.style.display = 'none';
+    setTimeout(() => document.getElementById('chatInput').focus(), 100);
+  }
+}
+
+function autoResize(el) {
+  el.style.height = 'auto';
+  el.style.height = Math.min(el.scrollHeight, 100) + 'px';
+}
+
+function handleChatKey(e) {
+  if (e.key === 'Enter' && !e.shiftKey) {
+    e.preventDefault();
+    sendChatMessage();
+  }
+}
+
+function sendSuggestion(btn) {
+  document.getElementById('chatInput').value = btn.textContent;
+  document.getElementById('chatSuggestions').style.display = 'none';
+  sendChatMessage();
+}
+
+function appendMessage(role, text) {
+  const container = document.getElementById('chatMessages');
+  const msg = document.createElement('div');
+  msg.className = `chat-msg ${role}`;
+  const bubble = document.createElement('div');
+  bubble.className = 'chat-bubble';
+  bubble.innerHTML = formatChatText(text);
+  msg.appendChild(bubble);
+  container.appendChild(msg);
+  container.scrollTop = container.scrollHeight;
+  return msg;
+}
+
+function formatChatText(text) {
+  return text
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+    .replace(/^[-•] (.+)$/gm, '<li>$1</li>')
+    .replace(/(<li>.*<\/li>)/s, '<ul>$1</ul>')
+    .replace(/\n\n/g, '<br><br>')
+    .replace(/\n/g, '<br>');
+}
+
+function showTyping() {
+  const container = document.getElementById('chatMessages');
+  const el = document.createElement('div');
+  el.className = 'chat-typing';
+  el.id = 'chatTyping';
+  el.innerHTML = '<span></span><span></span><span></span>';
+  container.appendChild(el);
+  container.scrollTop = container.scrollHeight;
+}
+
+function hideTyping() {
+  const el = document.getElementById('chatTyping');
+  if (el) el.remove();
+}
+
+async function sendChatMessage() {
+  const input = document.getElementById('chatInput');
+  const text = input.value.trim();
+  if (!text) return;
+
+  document.getElementById('chatSuggestions').style.display = 'none';
+
+  input.value = '';
+  input.style.height = 'auto';
+  const sendBtn = document.getElementById('chatSendBtn');
+
+  appendMessage('user', text);
+  chatHistory.push({ role: 'user', content: text });
+
+  sendBtn.disabled = true;
+  showTyping();
+
+  try {
+    const res = await fetch('/api/chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ messages: chatHistory, systemPrompt: CHAT_SYSTEM_PROMPT }),
+    });
+
+    const data = await res.json();
+    hideTyping();
+
+    const reply = data.content?.[0]?.text || 'Something went wrong. Try again.';
+    chatHistory.push({ role: 'assistant', content: reply });
+    appendMessage('assistant', reply);
+  } catch (err) {
+    hideTyping();
+    appendMessage('assistant', 'Something went wrong — try again in a moment.');
+  }
+
+  sendBtn.disabled = false;
+  input.focus();
+}
 </script>
 
 </body>
