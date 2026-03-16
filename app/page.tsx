@@ -1,6 +1,7 @@
 'use client'
 
-import { useState } from 'react'
+import { Suspense, useState } from 'react'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { tools, allTags, type Tool, type ToolTag } from '@/lib/tools'
 import ToolCard from '@/components/ToolCard'
 import ToolModal from '@/components/ToolModal'
@@ -8,28 +9,27 @@ import SplashScreen from '@/components/SplashScreen'
 import TerminalSplash from '@/components/TerminalSplash'
 import HeroHeader from '@/components/HeroHeader'
 import GateScreen from '@/components/GateScreen'
-import MachineView from '@/components/MachineView'
 import ModeToggle from '@/components/ModeToggle'
 import Header from '@/components/Header'
 
-type Phase = 'gate' | 'lottie' | 'terminal' | 'main' | 'machine'
+type Phase = 'gate' | 'lottie' | 'terminal' | 'main'
 
 export default function Home() {
+  return (
+    <Suspense>
+      <HomeInner />
+    </Suspense>
+  )
+}
+
+function HomeInner() {
+  const router = useRouter()
+  const searchParams = useSearchParams()
   const [activeTag, setActiveTag] = useState<ToolTag | 'All'>('All')
   const [activeTool, setActiveTool] = useState<Tool | null>(null)
-  const [phase, setPhase] = useState<Phase>('gate')
+  const [phase, setPhase] = useState<Phase>(searchParams.get('skip') ? 'main' : 'gate')
 
   const filtered = activeTag === 'All' ? tools : tools.filter((t) => t.tag === activeTag)
-
-  // Machine mode: full-page takeover
-  if (phase === 'machine') {
-    return (
-      <>
-        <MachineView />
-        <ModeToggle mode="machine" onToggle={() => setPhase('main')} />
-      </>
-    )
-  }
 
   return (
     <>
@@ -40,7 +40,7 @@ export default function Home() {
       {phase === 'gate' && (
         <GateScreen
           onHuman={() => setPhase('lottie')}
-          onMachine={() => setPhase('machine')}
+          onMachine={() => router.push('/machine')}
         />
       )}
 
@@ -69,10 +69,10 @@ export default function Home() {
                     textTransform: 'uppercase',
                     letterSpacing: '0.06em',
                     padding: '5px 12px',
-                    borderRadius: '5px',
-                    border: `1px solid ${active ? '#008c44' : '#d4e8da'}`,
-                    background: active ? '#008c44' : '#fff',
-                    color: active ? '#fff' : '#676c79',
+                    borderRadius: 0,
+                    border: `1px solid ${active ? '#d4e8da' : '#d4e8da'}`,
+                    background: active ? '#EEFF8C' : '#fff',
+                    color: active ? '#000d05' : '#676c79',
                     cursor: 'pointer',
                     transition: 'all 0.15s ease',
                   }}
@@ -105,7 +105,7 @@ export default function Home() {
 
       {/* Sticky toggle — only visible once past splashes */}
       {phase === 'main' && (
-        <ModeToggle mode="human" onToggle={() => setPhase('machine')} />
+        <ModeToggle mode="human" onToggle={() => router.push('/machine')} />
       )}
     </>
   )
