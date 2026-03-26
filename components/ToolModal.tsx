@@ -62,7 +62,7 @@ export default function ToolModal({ tool, onClose }: Props) {
             fontSize: '13px',
             color: '#676c79',
             padding: '4px 8px',
-            borderRadius: '4px',
+            borderRadius: 0,
           }}
           aria-label="Close"
         >
@@ -95,7 +95,7 @@ export default function ToolModal({ tool, onClose }: Props) {
             alignItems: 'center',
             color: '#676c79',
             padding: '4px 8px',
-            borderRadius: '4px',
+            borderRadius: 0,
           }}
           aria-label={`Open ${tool.name} in new tab`}
         >

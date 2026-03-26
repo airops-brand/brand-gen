@@ -3,13 +3,6 @@
 import { useState } from 'react'
 import type { Tool } from '@/lib/tools'
 
-const TAG_COLORS: Record<string, string> = {
-  Content:    '#e6f5ec',
-  Brand:      '#e6f5ec',
-  Analytics:  '#e6f5ec',
-  Enablement: '#e6f5ec',
-}
-
 // Scale factor: card preview area is ~336px wide, tools are 1200px wide
 // 336/1200 ≈ 0.28
 const SCALE = 0.28
@@ -89,12 +82,12 @@ export default function ToolCard({ tool, onClick }: Props) {
                 fontFamily: "'Saans Mono', monospace",
                 fontSize: '11px',
                 fontWeight: 500,
-                color: '#676c79',
+                color: '#000d05',
                 textTransform: 'uppercase',
                 letterSpacing: '0.08em',
-                background: '#fff',
+                background: '#EEFF8C',
                 border: '1px solid #d4e8da',
-                borderRadius: '4px',
+                borderRadius: 0,
                 padding: '4px 10px',
               }}
             >
@@ -115,9 +108,9 @@ export default function ToolCard({ tool, onClick }: Props) {
             fontWeight: 500,
             textTransform: 'uppercase',
             letterSpacing: '0.06em',
-            color: '#008c44',
-            background: TAG_COLORS[tool.tag] ?? '#e6f5ec',
-            borderRadius: '4px',
+            color: '#000d05',
+            background: '#EEFF8C',
+            borderRadius: 0,
             padding: '2px 7px',
             alignSelf: 'flex-start',
           }}

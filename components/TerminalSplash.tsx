@@ -41,7 +41,7 @@ export default function TerminalSplash({ onDone }: { onDone: () => void }) {
           maxWidth: 1000,
           height: '62vh',
           maxHeight: 560,
-          borderRadius: '10px',
+          borderRadius: 0,
           overflow: 'hidden',
           boxShadow: '0 40px 100px rgba(0,0,0,0.45)',
           display: 'flex',

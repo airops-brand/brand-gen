@@ -1,11 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-const CHANNELS = [
-  { id: 'U09K60X677C', name: '@jess' },
-];
+const CHANNEL = { id: 'C08BB271XE0', name: '#g-growth-tactics' };
 
 const MESSAGE = {
-  text: ":spiral_calendar_pad: *Brand team requests for next week are due TODAY by EOD.*",
+  text: ":spiral_calendar_pad: Brand team requests for next week are due TODAY by EOD.",
   blocks: [
     {
       type: "section",
@@ -28,35 +26,10 @@ const MESSAGE = {
         text: ":point_right: Not sure what to ask for or how to scope it? Use the <https://brand-gen-pi.vercel.app/creative-requests-rubric.html|Creative Request Rubric> — it covers tiers, timelines, and exactly what to include in your submission.",
       },
     },
-    {
-      type: "divider",
-    },
-    {
-      type: "context",
-      elements: [
-        {
-          type: "mrkdwn",
-          text: "Questions? Ping Jess in #brand-team",
-        },
-      ],
-    },
   ],
 };
 
-async function postToChannel(channelId: string, token: string) {
-  const res = await fetch('https://slack.com/api/chat.postMessage', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`,
-    },
-    body: JSON.stringify({ channel: channelId, ...MESSAGE }),
-  });
-  return res.json();
-}
-
 export async function GET(req: NextRequest) {
-  // Verify Vercel cron secret
   const authHeader = req.headers.get('authorization');
   if (authHeader !== `Bearer ${process.env.CRON_SECRET?.trim()}`) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
@@ -67,13 +40,18 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: 'SLACK_BOT_TOKEN not set' }, { status: 500 });
   }
 
-  const results = await Promise.all(
-    CHANNELS.map(async (ch) => {
-      const data = await postToChannel(ch.id, token);
-      return { channel: ch.name, ok: data.ok, error: data.error ?? null };
-    })
-  );
+  const res = await fetch('https://slack.com/api/chat.postMessage', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ channel: CHANNEL.id, ...MESSAGE }),
+  });
+  const data = await res.json();
 
-  const allOk = results.every((r) => r.ok);
-  return NextResponse.json({ results }, { status: allOk ? 200 : 500 });
+  return NextResponse.json(
+    { channel: CHANNEL.name, ok: data.ok, error: data.error ?? null },
+    { status: data.ok ? 200 : 500 }
+  );
 }

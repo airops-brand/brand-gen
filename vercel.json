@@ -3,6 +3,14 @@
     {
       "path": "/api/weekly-reminder",
       "schedule": "0 18 * * 3"
+    },
+    {
+      "path": "/api/channel-reminder",
+      "schedule": "0 17 * * 4"
+    },
+    {
+      "path": "/api/herald/generate",
+      "schedule": "0 14 * * 4"
     }
   ]
 }
