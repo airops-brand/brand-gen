@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weekly Focus — Brand Team</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&display=swap');
+
+  @font-face {
+    font-family: 'Serrif VF';
+    src: url('SerrifVF.ttf') format('truetype');
+    font-weight: 100 900;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: 'Saans';
+    src: url('Saans-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: 'Saans';
+    src: url('Saans-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: 'Saans';
+    src: url('Saans-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --white: #ffffff;
+    --near-black: #000d05;
+    --green-50: #f8fffb;
+    --green-100: #dfeae3;
+    --green-200: #CCFFE0;
+    --green-500: #008c44;
+    --green-600: #002910;
+    --interaction: #00ff64;
+    --accent-label: #EEFF8C;
+    --stroke-green: #d4e8da;
+    --text-secondary: #676c79;
+    --canvas: #f4f7f5;
+  }
+
+  body {
+    background: var(--canvas);
+    font-family: 'DM Mono', monospace;
+    min-height: 100vh;
+    padding: 40px 32px 80px;
+    overflow-x: hidden;
+  }
+
+  /* dot grid background */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: radial-gradient(circle, #c8ddd0 1px, transparent 1px);
+    background-size: 24px 24px;
+    opacity: 0.5;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .board {
+    position: relative;
+    z-index: 1;
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+
+  /* Header */
+  .header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 40px;
+    gap: 24px;
+  }
+
+  .header-left {}
+
+  .week-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--accent-label);
+    border: 1px solid #c8d400;
+    padding: 4px 10px;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--near-black);
+    margin-bottom: 12px;
+  }
+
+  .board-title {
+    font-family: 'Serrif VF', Georgia, serif;
+    font-size: 42px;
+    font-weight: 400;
+    color: var(--near-black);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+  }
+
+  .board-title span {
+    color: var(--green-500);
+  }
+
+  .logo-area svg {
+    opacity: 0.85;
+  }
+
+  /* Grid */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: auto auto;
+    gap: 16px;
+  }
+
+  /* Cards */
+  .card {
+    background: var(--white);
+    border: 1px solid var(--stroke-green);
+    padding: 24px 24px 28px;
+    position: relative;
+    transition: box-shadow 0.15s ease;
+  }
+
+  .card:hover {
+    box-shadow: 4px 4px 0 var(--green-200);
+  }
+
+  .card-tag {
+    display: inline-flex;
+    align-items: center;
+    padding: 3px 8px;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    border: 1px solid;
+  }
+
+  .tag-strategy   { background: var(--accent-label); border-color: #c8d400; color: var(--near-black); }
+  .tag-design     { background: var(--green-200); border-color: var(--stroke-green); color: var(--near-black); }
+  .tag-content    { background: #e8f0ff; border-color: #c0cdf5; color: #1a2a8a; }
+  .tag-social     { background: #fff0e8; border-color: #f5c8a0; color: #7a3000; }
+  .tag-dev        { background: var(--green-600); border-color: #001a08; color: #00ff64; }
+
+  .card-title {
+    font-family: 'Serrif VF', Georgia, serif;
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--near-black);
+    letter-spacing: -0.01em;
+    line-height: 1.15;
+    margin-bottom: 16px;
+  }
+
+  .divider {
+    height: 1px;
+    background: var(--stroke-green);
+    margin-bottom: 16px;
+  }
+
+  /* Tasks */
+  .tasks { display: flex; flex-direction: column; gap: 10px; }
+
+  .task {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+
+  .task-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--green-500);
+    margin-top: 5px;
+    flex-shrink: 0;
+  }
+
+  .task-text {
+    font-size: 13px;
+    font-weight: 400;
+    color: #1a2a1e;
+    line-height: 1.5;
+    letter-spacing: 0;
+    font-family: 'Saans', 'Helvetica Neue', sans-serif;
+  }
+
+  .task-text strong {
+    color: var(--near-black);
+    font-weight: 500;
+  }
+
+  /* Owner chips */
+  .owners {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 18px;
+    padding-top: 14px;
+    border-top: 1px solid var(--stroke-green);
+  }
+
+  .owner-chip {
+    background: var(--green-50);
+    border: 1px solid var(--stroke-green);
+    padding: 2px 8px;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--green-500);
+  }
+
+  .owner-chip.lead {
+    background: var(--near-black);
+    border-color: var(--near-black);
+    color: var(--interaction);
+  }
+
+  /* Success block inside card */
+  .success-block {
+    margin-top: 16px;
+    background: var(--green-50);
+    border: 1px solid var(--stroke-green);
+    padding: 12px 14px;
+  }
+
+  .success-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--green-500);
+    margin-bottom: 6px;
+  }
+
+  .success-text {
+    font-size: 12px;
+    color: #2a4030;
+    line-height: 1.5;
+    font-family: 'Saans', 'Helvetica Neue', sans-serif;
+    letter-spacing: 0;
+  }
+
+  /* Grid layout — P1 row then P2 equal columns */
+  .grid {
+    grid-template-columns: repeat(12, 1fr);
+  }
+  .card-dotcom            { grid-column: 1 / 4; }
+  .card-airops-u-design   { grid-column: 4 / 7; }
+  .card-airops-u-dev      { grid-column: 7 / 10; }
+  .card-next-conf         { grid-column: 10 / 13; }
+
+  .p2-label {
+    grid-column: 1 / -1;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    padding: 8px 0 0;
+    border-top: 1px solid var(--stroke-green);
+    margin-top: 8px;
+  }
+
+  .card-keynote,
+  .card-next-video,
+  .card-influencer,
+  .card-seo-week,
+  .card-smaller-projects { grid-column: span 6; }
+
+  /* Alert banner */
+  .alert-banner {
+    background: #fffbe6;
+    border: 1px solid #f0d000;
+    padding: 14px 18px;
+    margin-top: 16px;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+  .alert-icon {
+    font-size: 14px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .alert-text {
+    font-family: 'Saans', 'Helvetica Neue', sans-serif;
+    font-size: 13px;
+    color: #5a4200;
+    line-height: 1.5;
+  }
+  .alert-text strong {
+    font-weight: 600;
+    color: #3a2800;
+  }
+
+  /* Smaller projects grid inside card */
+  .mini-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 0;
+  }
+  .mini-card {
+    background: var(--green-50);
+    border: 1px solid var(--stroke-green);
+    padding: 16px 18px;
+  }
+  .mini-card-owner {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--green-500);
+    margin-bottom: 6px;
+  }
+  .mini-card-text {
+    font-family: 'Saans', 'Helvetica Neue', sans-serif;
+    font-size: 13px;
+    color: #1a2a1e;
+    line-height: 1.5;
+  }
+
+  @media (max-width: 900px) {
+    .mini-grid { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 600px) {
+    body { padding: 20px 12px 60px; }
+    .header { flex-direction: column; gap: 12px; }
+    .logo-area svg { width: 100px; }
+    .board-title { font-size: 28px; }
+    .card { padding: 18px 16px 22px; }
+    .card-title { font-size: 18px; }
+    .legend { gap: 8px; }
+    .legend-item { font-size: 9px; }
+    .owners { gap: 4px; }
+    .owner-chip { font-size: 9px; padding: 2px 6px; }
+    .alert-banner { flex-direction: column; gap: 6px; }
+    .mini-grid { grid-template-columns: 1fr !important; }
+  }
+
+  /* Connector line aesthetic */
+  .connector-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 20px 0 24px;
+    opacity: 0.4;
+  }
+  .connector-line { flex: 1; height: 1px; background: var(--green-500); }
+  .connector-dot  { width: 6px; height: 6px; background: var(--green-500); }
+
+  /* Key for card color coding */
+  .legend {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-top: 32px;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+  }
+
+  .legend-swatch {
+    width: 12px;
+    height: 12px;
+    border: 1px solid currentColor;
+  }
+
+  @media (max-width: 900px) {
+    .grid { grid-template-columns: 1fr !important; }
+    .card-dotcom,
+    .card-airops-u-design,
+    .card-airops-u-dev,
+    .card-next-conf,
+    .card-keynote,
+    .card-next-video,
+    .card-influencer,
+    .card-seo-week,
+    .card-smaller-projects { grid-column: 1 / -1 !important; }
+    .board-title { font-size: 30px; }
+  }
+
+  /* Empty state for the current week */
+  .empty-state {
+    background: var(--white);
+    border: 1px dashed var(--stroke-green);
+    padding: 48px 32px;
+    text-align: center;
+    margin-bottom: 24px;
+  }
+  .empty-state-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--green-500);
+    margin-bottom: 12px;
+  }
+  .empty-state-title {
+    font-family: 'Serrif VF', Georgia, serif;
+    font-size: 28px;
+    font-weight: 400;
+    color: var(--near-black);
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    margin-bottom: 10px;
+  }
+  .empty-state-body {
+    font-family: 'Saans', 'Helvetica Neue', sans-serif;
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    max-width: 440px;
+    margin: 0 auto;
+  }
+
+  /* Past week archive */
+  .past-week {
+    margin-top: 80px;
+    padding-top: 32px;
+    border-top: 2px solid var(--stroke-green);
+    opacity: 0.78;
+  }
+  .past-week:hover { opacity: 1; }
+  .past-week-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+  .past-week-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    background: var(--green-100);
+    border: 1px solid var(--stroke-green);
+    padding: 4px 10px;
+  }
+  .past-week-title {
+    font-family: 'Serrif VF', Georgia, serif;
+    font-size: 24px;
+    font-weight: 400;
+    color: var(--near-black);
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+  .past-week-title span { color: var(--text-secondary); }
+  .past-week .card { background: var(--green-50); }
+</style>
+</head>
+<body>
+<div class="board">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-left">
+      <div class="week-label">&#9632; Week of Apr 27, 2026</div>
+      <h1 class="board-title">Brand Team<br><span>Weekly Focus</span></h1>
+    </div>
+    <div class="logo-area">
+      <svg width="140" height="45" viewBox="0 0 784 252" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M111.828 65.6415V88.4663C101.564 72.0112 85.627 61.9258 65.9084 61.9258C23.7703 61.9258 0 92.9782 0 134.647C0 176.581 24.0404 208.695 66.4487 208.695C86.1672 208.695 101.834 198.609 111.828 182.154V204.979H144.782V65.6415H111.828ZM72.9315 181.093C48.8911 181.093 35.1152 159.064 35.1152 134.647C35.1152 110.76 48.621 89.7933 73.4717 89.7933C94.0006 89.7933 111.558 104.391 111.558 134.116C111.558 163.31 94.8109 181.093 72.9315 181.093Z" fill="#001408"/>
+        <path d="M173.137 65.6494V204.987H208.252V65.6494H173.137Z" fill="#001408"/>
+        <path d="M272.998 100.141V65.6386H237.883V204.976H272.998V125.355C272.998 104.919 287.314 96.691 300.82 96.691C308.653 96.691 316.757 98.8143 321.079 100.407V63.25C298.119 63.25 279.211 76.7856 272.998 100.141Z" fill="#001408"/>
+        <path d="M329.629 108.115C329.629 151.377 359.882 182.163 403.371 182.163C447.13 182.163 477.115 151.377 477.115 108.115C477.115 65.6507 447.13 35.3945 403.371 35.3945C359.882 35.3945 329.629 65.6507 329.629 108.115ZM441.997 108.115C441.997 135.187 427.141 154.561 403.371 154.561C379.33 154.561 364.744 135.187 364.744 108.115C364.744 82.1058 379.33 63.2621 403.371 63.2621C427.141 63.2621 441.997 82.1058 441.997 108.115Z" fill="#001408"/>
+        <path d="M575.086 61.9258C554.557 61.9258 537.81 73.869 528.896 92.9782V65.6415H493.781V251.425H528.896V180.031C538.891 197.282 557.529 208.695 577.247 208.695C615.604 208.695 642.345 179.235 642.345 137.035C642.345 92.7128 614.523 61.9258 575.086 61.9258ZM568.874 182.685C545.374 182.685 528.896 163.31 528.896 135.708C528.896 107.31 545.374 87.4047 568.874 87.4047C591.293 87.4047 607.23 107.841 607.23 136.77C607.23 163.841 591.293 182.685 568.874 182.685Z" fill="#001408"/>
+        <path d="M653.555 156.675C653.555 181.889 676.244 208.695 721.624 208.695C767.274 208.695 783.751 182.42 783.751 161.983C783.751 130.666 746.205 125.092 721.084 120.315C704.066 117.395 693.262 115.007 693.262 105.452C693.262 94.5706 705.417 87.6701 718.383 87.6701C735.94 87.6701 742.693 99.6133 743.233 112.353H778.349C778.349 91.6511 763.492 61.9258 717.572 61.9258C677.865 61.9258 658.147 83.9544 658.147 107.575C658.147 141.282 696.233 144.732 721.354 149.509C735.94 152.163 748.636 155.348 748.636 165.699C748.636 176.05 736.21 182.95 722.975 182.95C710.549 182.95 688.67 176.05 688.67 156.675H653.555Z" fill="#001408"/>
+        <path d="M191.339 48.6576C176.921 48.6576 166.578 38.4949 166.578 24.6368C166.578 10.7786 176.921 0 191.339 0C205.13 0 216.1 10.7786 216.1 24.6368C216.1 38.4949 205.13 48.6576 191.339 48.6576Z" fill="#001408"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- LEGEND -->
+  <div class="legend" style="margin-top:0; margin-bottom:24px;">
+    <div class="legend-item"><div class="legend-swatch" style="background:#EEFF8C; color:#c8d400;"></div> Strategy</div>
+    <div class="legend-item"><div class="legend-swatch" style="background:#CCFFE0; color:#d4e8da;"></div> Design + Dev</div>
+    <div class="legend-item"><div class="legend-swatch" style="background:#e8f0ff; color:#c0cdf5;"></div> Conf / Content</div>
+    <div class="legend-item" style="color: #676c79; font-size:10px; letter-spacing:0.08em; text-transform:uppercase; margin-left:auto;">Lead owner = dark chip</div>
+  </div>
+
+  <!-- CURRENT WEEK — empty starter state -->
+  <div class="empty-state">
+    <div class="empty-state-eyebrow">&#9632; New week</div>
+    <div class="empty-state-title">Plan this week's focus</div>
+    <div class="empty-state-body">Click anywhere to start drafting cards for the week of Apr 27. Past week's board is archived below for reference.</div>
+  </div>
+
+  <!-- PAST WEEK ARCHIVE -->
+  <div class="past-week">
+    <div class="past-week-header">
+      <div class="past-week-tag">Archive</div>
+      <div class="past-week-title">Past Week <span>&middot; Apr 13, 2026</span></div>
+    </div>
+
+  <!-- GRID -->
+  <div class="grid">
+
+    <div class="p2-label" style="margin-top:0; border-top:none; padding-top:0;">Top priorities this week</div>
+
+    <!-- .COM -->
+    <div class="card card-dotcom">
+      <div class="card-tag tag-strategy">Strategy</div>
+      <div class="card-title">.com Updates [for Next]</div>
+      <div class="divider"></div>
+      <div class="tasks">
+        <div class="task">
+          <div class="task-dot"></div>
+          <div class="task-text"><strong>Jess:</strong> prep FigJam around P0 pages -- include screenshots of existing pages so Christy + Alex can annotate change areas</div>
+        </div>
+        <div class="task">
+          <div class="task-dot"></div>
+          <div class="task-text"><strong>Jess:</strong> pre-narrative work -- define page hierarchy before storytelling begins</div>
+        </div>
+        <div class="task">
+          <div class="task-dot"></div>
+          <div class="task-text"><strong>Design:</strong> loop in once FigJam baseline is set</div>
+        </div>
+        <div class="task">
+          <div class="task-dot"></div>
+          <div class="task-text"><strong>Dev:</strong> standby pending narrative decisions</div>
+        </div>
+      </div>
+      <div class="success-block">
+        <div class="success-label">&#10003; Success looks like</div>
+        <div class="success-text">FigJam ready with annotated P0 pages. Christy + Alex aligned on priority change areas before narrative work begins.</div>
+      </div>
+      <div class="owners">
+        <div class="owner-chip lead">Jess</div>
+        <div class="owner-chip">Christy</div>
+        <div class="owner-chip">Alex</div>
+        <div class="owner-chip">Design</div>
+        <div class="owner-chip">Dev</div>
+      </div>
+    </div>
+
+    <!-- AIROPS U — DESIGN -->
+    <div class="card card-airops-u-design">
+      <div class="card-tag tag-design">Design</div>
+      <div class="card-title">AirOps University</div>
+      <a href="https://app.asana.com/1/1207672595664544/project/1213971028424350/board/1213971028424372" target="_blank" style="display:inline-flex;align-items:center;gap:5px;font-family:'DM Mono',monospace;font-size:10px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--green-500);text-decoration:none;margin-bottom:14px;">
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        View in Asana
+      </a>
+      <div class="divider"></div>
+      <div class="tasks">
+        <div class="task">
+          <div class="task-dot"></div>
+          <div class="task-text"><strong>Pat:</strong> finish remaining page designs, share with Eoin + Alex in person in NYC end of week</div>
+        </div>
+        <div class="task">
+          <div class="task-dot"></div>
+          <div class="task-text"><strong>Eoin:</strong> filming new university sessions this week with video agency -- studio in NYC. Pat on-site for visual support.</div>
+        </div>
+        <div class="task">
+          <div class="task-dot"></div>
+          <div class="task-text"><strong>Jess:</strong> copy refinements -- starting after Lisbon</div>
+        </div>
+      </div>
+      <div class="success-block">
+        <div class="success-label">&#10003; Success looks like</div>
+        <div class="success-text">All page designs complete + reviewed in NYC. Session filming wrapped. Copy queue ready for post-Lisbon sprint toward May 16 launch.</div>
+      </div>
+      <div class="owners">
+        <div class="owner-chip lead">Pat</div>
+        <div class="owner-chip">Eoin</div>
+        <div class="owner-chip">Jess (post-Lisbon)</div>
+      </div>
+    </div>
+
+    <!-- AIROPS U — DEV -->
+    <div class="card card-airops-u-dev">
+      <div class="card-tag tag-dev">Dev</div>
+      <div class="card-title">AirOps University</div>
+      <div class="divider"></div>
+      <div class="tasks">
+        <div class="task">
+          <div class="task-dot"></div>
+          <div class="task-text"><strong>Aaron:</strong> Sanity CMS space set up and working by end of week -- ready to share with Jess + Eoin</div>
+        </div>
+        <div class="task">
+          <div class="task-dot"></div>
+          <div class="task-text"><strong>Aaron:</strong> get the University framework built and testable this week</div>
+        </div>
+      </div>
+      <div class="success-block">
+        <div class="success-label">&#10003; Success looks like</div>
+        <div class="success-text">Sanity CMS space live and shared with Jess + Eoin. University framework running and testable.</div>
+      </div>
+      <div class="owners">
+        <div class="owner-chip lead">Aaron</div>
+      </div>
+    </div>
+
+    <!-- NEXT CONF -->
+    <div class="card card-next-conf">
+      <div class="card-tag tag-content">AirOps Next — May 13</div>
+      <div class="card-title">Next Conf</div>
+      <div class="divider"></div>
+      <div class="tasks">
+        <div class="task">
+          <div class="task-dot"></div>
+          <div class="task-text"><strong>Social posts:</strong> conference content that may need to go live this week -- Pat + Ally handle</div>
+        </div>
+        <div class="task">
+          <div class="task-dot"></div>
+          <div class="task-text"><strong>Initial logos:</strong> confirm w/ speaker teams (to be determined)</div>
+        </div>
+        <div class="task">
+          <div class="task-dot"></div>
+          <div class="task-text"><strong>Branded signage:</strong> Pat kicking off all conference signage -- print production lead time in motion. Working with Ally in NYC.</div>
+        </div>
+      </div>
+      <div class="success-block">
+        <div class="success-label">&#10003; Success looks like</div>
+        <div class="success-text">Signage in production. Social posts queued for the week.</div>
+      </div>
+      <div class="owners">
+        <div class="owner-chip lead">Cyris</div>
+        <div class="owner-chip" style="background:var(--green-100); color:var(--green-600);">Pat (support)</div>
+        <div class="owner-chip">Ally</div>
+        <div class="owner-chip">Aaron</div>
+        <div class="owner-chip">Kendall (content)</div>
+      </div>
+    </div>
+
+    <div class="p2-label">Also this week</div>
+
+    <!-- INFLUENCER STRATEGY -->
+    <div class="card card-influencer">
+      <div class="card-tag tag-strategy">Strategy</div>
+      <div class="card-title">Influencer Strategy</div>
+      <div class="divider"></div>
+      <div class="tasks">
+        <div class="task">
+          <div class="task-dot"></div>
+          <div class="task-text"><strong>Jess + Ally:</strong> meeting with 2 agencies this week -- brief already prepared</div>
+        </div>
+        <div class="task">
+          <div class="task-dot"></div>
+          <div class="task-text"><strong>Jess:</strong> share brief across relevant stakeholders ahead of meetings</div>
+        </div>
+        <div class="task">
+          <div class="task-dot"></div>
+          <div class="task-text"><strong>Jess:</strong> budget context to be included in brief -- substantial; discuss specifics with Christy in 1:1</div>
+        </div>
+      </div>
+      <div class="success-block">
+        <div class="success-label">&#10003; Success looks like</div>
+        <div class="success-text">Both agency meetings completed with brief distributed. Budget framing aligned with Christy before any external commitments.</div>
+      </div>
+      <div class="owners">
+        <div class="owner-chip lead">Jess</div>
+        <div class="owner-chip lead">Ally</div>
+        <div class="owner-chip">Christy (budget 1:1)</div>
+      </div>
+    </div>
+
+    <!-- KEYNOTE PRODUCTION -->
+    <div class="card card-keynote">
+      <div class="card-tag tag-content">AirOps Next — May 13</div>
+      <div class="card-title">Keynote Presentation Production</div>
+      <div class="divider"></div>
+      <div class="tasks">
+        <div class="task">
+          <div class="task-dot"></div>
+          <div class="task-text"><strong>Jess:</strong> define when keynote production kicks off -- timeline is tight against May 13</div>
+        </div>
+        <div class="task">
+          <div class="task-dot"></div>
+          <div class="task-text"><strong>Jess:</strong> prioritize against all other in-flight work -- what gets deprioritized to make room?</div>
+        </div>
+        <div class="task">
+          <div class="task-dot"></div>
+          <div class="task-text"><strong>TBD:</strong> identify who owns slide design, narrative, and rehearsal coordination</div>
+        </div>
+      </div>
+      <div class="alert-banner" style="background:#fff0f0; border-color:#e8a0a0;">
+        <div class="alert-icon" style="color:#802828;">!</div>
+        <div class="alert-text" style="color:#331010;">
+          <strong>Not yet scheduled.</strong> Keynote production has no start date, no owner assignment, and no prioritization against current workstreams. Needs immediate discussion to avoid a crunch before May 13.
+        </div>
+      </div>
+      <div class="owners">
+        <div class="owner-chip" style="background:#ffe2e2; border-color:#e8a0a0; color:#802828;">Unassigned</div>
+      </div>
+    </div>
+
+    <!-- NEXT VIDEO -->
+    <div class="card card-next-video">
+      <div class="card-tag tag-content">AirOps Next — May 13</div>
+      <div class="card-title">Next Video</div>
+      <div class="divider"></div>
+      <div class="tasks">
+        <div class="task">
+          <div class="task-dot"></div>
+          <div class="task-text"><strong>Jess:</strong> share v2 script for approval this week</div>
+        </div>
+        <div class="task">
+          <div class="task-dot"></div>
+          <div class="task-text"><strong>Jess + Jordan:</strong> kick off with production agency -- they can help continue to massage the script and narrative</div>
+        </div>
+        <div class="task">
+          <div class="task-dot"></div>
+          <div class="task-text"><strong>Jess:</strong> only agency available so far is Connor's -- need to confirm and get moving</div>
+        </div>
+      </div>
+      <div class="success-block">
+        <div class="success-label">&#10003; Success looks like</div>
+        <div class="success-text">v2 script shared and in review. Agency partnership kicked off with Connor's team, script refinement underway.</div>
+      </div>
+      <div class="owners">
+        <div class="owner-chip lead">Jess</div>
+        <div class="owner-chip">Jordan</div>
+      </div>
+    </div>
+
+    <!-- SEO WEEK CREATIVE -->
+    <div class="card card-seo-week">
+      <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:24px; flex-wrap:wrap;">
+        <div>
+          <div class="card-tag tag-social" style="background:#f3e8ff; border-color:#d8b4fe; color:#5b21b6;">SEO Week Creative</div>
+          <div class="card-title">SEO Week — Creative Brief</div>
+          <a href="https://app.asana.com/1/1207672595664544/project/1213528520686595/task/1213626507324109?focus=true" target="_blank" style="display:inline-flex;align-items:center;gap:5px;font-family:'DM Mono',monospace;font-size:10px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--green-500);text-decoration:none;margin-bottom:14px;">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            View in Asana
+          </a>
+        </div>
+        <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap; padding-top:4px;">
+          <div class="owner-chip lead">Cyris</div>
+          <div class="owner-chip" style="background:var(--green-100); color:var(--green-600);">Pat (support)</div>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="mini-grid" style="grid-template-columns: repeat(3, 1fr); margin-bottom:16px;">
+        <div class="mini-card">
+          <div class="mini-card-owner">Deliverable 01</div>
+          <div class="mini-card-text" style="font-weight:600; margin-bottom:4px;">Video</div>
+          <div class="mini-card-text">Brief Cyris this week. Scope, format, and messaging to be defined. Content direction TBD -- does existing messaging need updating?</div>
+        </div>
+        <div class="mini-card">
+          <div class="mini-card-owner">Deliverable 02</div>
+          <div class="mini-card-text" style="font-weight:600; margin-bottom:4px;">Question Cards</div>
+          <div class="mini-card-text">Brief Cyris this week. Format and copy direction needed. Pull from brand voice -- confirm questions are current and on-message.</div>
+        </div>
+        <div class="mini-card">
+          <div class="mini-card-owner">Deliverable 03</div>
+          <div class="mini-card-text" style="font-weight:600; margin-bottom:4px;">Collateral</div>
+          <div class="mini-card-text">Brief Cyris this week. Includes any printed or digital leave-behinds. Review "What is AirOps" one-pager for content freshness before production.</div>
+        </div>
+      </div>
+      <div class="alert-banner" style="background:#faf5ff; border-color:#c084fc;">
+        <div class="alert-icon" style="color:#7c3aed;">?</div>
+        <div class="alert-text" style="color:#4c1d95;">
+          <strong>Open question: <a href="https://www.notion.so/airopshq/What-is-AirOps-3101f419db8a80be828ec44685c1f696" target="_blank" style="color:#7c3aed; text-decoration:underline;">"What is AirOps" one-pager</a></strong> -- linked on the brand page. Does the content need to be updated before we go into production for SEO week? Flag for Cyris + Pat review before briefing kicks off.
+        </div>
+      </div>
+    </div>
+
+    <!-- SMALLER PROJECTS -->
+    <div class="card card-smaller-projects">
+      <div class="card-tag tag-design">Smaller Projects</div>
+      <div class="card-title">Also in flight this week</div>
+      <div class="divider"></div>
+      <div class="mini-grid">
+        <div class="mini-card">
+          <div class="mini-card-owner">Cyris</div>
+          <div class="mini-card-text">AM deck for Richard and Bryan</div>
+        </div>
+        <div class="mini-card">
+          <div class="mini-card-owner">Jordan</div>
+          <div class="mini-card-text">Finalizing blog post on customer usage of AirOps MCPs -- in lieu of going live with LP</div>
+        </div>
+        <div class="mini-card">
+          <div class="mini-card-owner">Cyris</div>
+          <div class="mini-card-text">Oyster customer story assets</div>
+        </div>
+        <div class="mini-card">
+          <div class="mini-card-owner">Pat + Cyris</div>
+          <div class="mini-card-text">Finalizing SEO booth design</div>
+        </div>
+        <div class="mini-card">
+          <div class="mini-card-owner">Pat + Aaron</div>
+          <div class="mini-card-text">Lisbon LP -- tag-teaming. Awaiting content from Kendall.</div>
+        </div>
+        <div class="mini-card">
+          <div class="mini-card-owner"><a href="https://app.asana.com/1/1207672595664544/project/1212008558402878/task/1213995362505612?focus=true" target="_blank" style="color:var(--green-500); text-decoration:none;">Cyris</a></div>
+          <div class="mini-card-text">Lead Mag images</div>
+        </div>
+      </div>
+      <div class="alert-banner">
+        <div class="alert-icon">⚠</div>
+        <div class="alert-text"><strong>SEO Week is coming up fast.</strong> Team needs more detail on what else is needed -- collateral, video content, etc. Let's plan in advance rather than rush. What do we know about scope?</div>
+      </div>
+    </div>
+
+  </div><!-- /grid -->
+
+  </div><!-- /past-week -->
+
+</div>
+<script src="agentation-bundle.js" defer></script>
+</body>
+</html>
