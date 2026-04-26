@@ -410,13 +410,135 @@
     .board-title { font-size: 30px; }
   }
 
+  /* Current week grid — flex layout so dragged cards flow naturally */
+  .current-week {
+    margin-bottom: 24px;
+  }
+  .current-week-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .current-week-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--green-500);
+    background: var(--green-200);
+    border: 1px solid var(--green-500);
+    padding: 4px 10px;
+  }
+  .current-week-title {
+    font-family: 'Serrif VF', Georgia, serif;
+    font-size: 24px;
+    font-weight: 400;
+    color: var(--near-black);
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+  .current-week-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+    min-height: 200px;
+  }
+  /* When a card is moved into the current week grid, drop the fixed grid-column placements */
+  .current-week-grid .card { grid-column: auto !important; }
+
+  /* Drag-and-drop visuals */
+  .card[draggable="true"] { cursor: grab; }
+  .card[draggable="true"]:active { cursor: grabbing; }
+  .card.dragging { opacity: 0.35; }
+
+  /* Inline editing */
+  [contenteditable="true"] { cursor: text; outline: none; }
+  [contenteditable="true"]:hover {
+    background: rgba(0, 255, 100, 0.07);
+    box-shadow: 0 0 0 2px rgba(0, 255, 100, 0.07);
+  }
+  [contenteditable="true"]:focus {
+    background: var(--white);
+    box-shadow: 0 0 0 2px var(--green-500);
+  }
+  .drop-active {
+    outline: 2px dashed var(--green-500);
+    outline-offset: 6px;
+    background: rgba(0, 255, 100, 0.04);
+  }
+  .drag-hint {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    margin-left: auto;
+  }
+
+  /* Remove button on cloned cards in current week */
+  .current-week-grid .card { position: relative; }
+  .card-remove {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: var(--white);
+    border: 1px solid var(--stroke-green);
+    color: var(--text-secondary);
+    font-size: 14px;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    z-index: 5;
+    font-family: inherit;
+  }
+  .card-remove:hover {
+    background: #ffe2e2;
+    color: #802828;
+    border-color: #e8a0a0;
+  }
+
+  /* Past-week collapse toggle */
+  .past-week-toggle {
+    margin-left: auto;
+    background: var(--white);
+    border: 1px solid var(--stroke-green);
+    padding: 6px 12px;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .past-week-toggle:hover { background: var(--green-50); color: var(--near-black); }
+  .past-week-toggle .chevron {
+    display: inline-block;
+    transition: transform 0.2s ease;
+    font-size: 9px;
+  }
+  .past-week.collapsed .past-week-toggle .chevron { transform: rotate(-90deg); }
+  .past-week.collapsed > .grid { display: none; }
+
   /* Empty state for the current week */
   .empty-state {
     background: var(--white);
     border: 1px dashed var(--stroke-green);
     padding: 48px 32px;
     text-align: center;
-    margin-bottom: 24px;
+    grid-column: 1 / -1;
   }
   .empty-state-eyebrow {
     font-family: 'DM Mono', monospace;
@@ -512,11 +634,20 @@
     <div class="legend-item" style="color: #676c79; font-size:10px; letter-spacing:0.08em; text-transform:uppercase; margin-left:auto;">Lead owner = dark chip</div>
   </div>
 
-  <!-- CURRENT WEEK — empty starter state -->
-  <div class="empty-state">
-    <div class="empty-state-eyebrow">&#9632; New week</div>
-    <div class="empty-state-title">Plan this week's focus</div>
-    <div class="empty-state-body">Click anywhere to start drafting cards for the week of Apr 27. Past week's board is archived below for reference.</div>
+  <!-- CURRENT WEEK — drop zone -->
+  <div class="current-week">
+    <div class="current-week-header">
+      <div class="current-week-tag">This week</div>
+      <div class="current-week-title">Apr 27, 2026</div>
+      <div class="drag-hint">&#8635; drag cards up to copy them forward</div>
+    </div>
+    <div class="current-week-grid" data-zone="current">
+      <div class="empty-state" data-empty>
+        <div class="empty-state-eyebrow">&#9632; New week</div>
+        <div class="empty-state-title">Plan this week's focus</div>
+        <div class="empty-state-body">Drag any card up from the past week below to carry it forward, or use agentation to draft new cards.</div>
+      </div>
+    </div>
   </div>
 
   <!-- PAST WEEK ARCHIVE -->
@@ -524,10 +655,14 @@
     <div class="past-week-header">
       <div class="past-week-tag">Archive</div>
       <div class="past-week-title">Past Week <span>&middot; Apr 13, 2026</span></div>
+      <button class="past-week-toggle" type="button" aria-expanded="true" aria-controls="past-week-grid">
+        <span class="toggle-label">Hide</span>
+        <span class="chevron">&#9660;</span>
+      </button>
     </div>
 
   <!-- GRID -->
-  <div class="grid">
+  <div class="grid" id="past-week-grid" data-zone="past">
 
     <div class="p2-label" style="margin-top:0; border-top:none; padding-top:0;">Top priorities this week</div>
 
@@ -832,6 +967,182 @@
   </div><!-- /past-week -->
 
 </div>
+<script>
+(function () {
+  const STORAGE_KEY = 'weekly-focus-board:current-week-cards';
+  const COLLAPSE_KEY = 'weekly-focus-board:past-week-collapsed';
+  const EDITS_KEY = 'weekly-focus-board:edits';
+  const EDITABLE_SELECTOR = '.card-title, .card-tag, .task-text, .success-label, .success-text, .mini-card-owner, .mini-card-text, .alert-text, .owner-chip';
+  const currentZone = document.querySelector('[data-zone="current"]');
+  const pastZone = document.querySelector('[data-zone="past"]');
+
+  pastZone.querySelectorAll('.card').forEach((card, i) => {
+    const tag = Array.from(card.classList).find(c => c.startsWith('card-')) || ('card-' + i);
+    card.dataset.cardId = tag;
+    applyEdits(card, 'past');
+    makeEditable(card);
+    wireCardDrag(card);
+  });
+
+  try {
+    const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+    saved.forEach(id => {
+      const original = pastZone.querySelector('.card[data-card-id="' + id + '"]');
+      if (original && !currentZone.querySelector('.card[data-card-id="' + id + '"]')) {
+        currentZone.appendChild(makeClone(original));
+      }
+    });
+  } catch (e) { /* noop */ }
+
+  updateEmptyState();
+  initCollapse();
+
+  let dragged = null;
+
+  function wireCardDrag(card) {
+    card.draggable = true;
+    card.addEventListener('dragstart', e => {
+      dragged = card;
+      card.classList.add('dragging');
+      e.dataTransfer.effectAllowed = currentZone.contains(card) ? 'move' : 'copy';
+      e.dataTransfer.setData('text/plain', card.dataset.cardId);
+    });
+    card.addEventListener('dragend', () => {
+      card.classList.remove('dragging');
+      dragged = null;
+      document.querySelectorAll('.drop-active').forEach(el => el.classList.remove('drop-active'));
+    });
+  }
+
+  function makeClone(original) {
+    const clone = original.cloneNode(true);
+    clone.classList.remove('dragging');
+    clone.querySelectorAll('.card-remove').forEach(el => el.remove());
+    const remove = document.createElement('button');
+    remove.className = 'card-remove';
+    remove.type = 'button';
+    remove.title = 'Remove from this week';
+    remove.setAttribute('aria-label', 'Remove from this week');
+    remove.textContent = '\u00d7';
+    remove.addEventListener('click', e => {
+      e.stopPropagation();
+      clone.remove();
+      updateEmptyState();
+      persist();
+    });
+    clone.appendChild(remove);
+    applyEdits(clone, 'current');
+    makeEditable(clone);
+    wireCardDrag(clone);
+    return clone;
+  }
+
+  function loadEdits() {
+    try { return JSON.parse(localStorage.getItem(EDITS_KEY) || '{}'); } catch (e) { return {}; }
+  }
+
+  function saveEdits(edits) {
+    localStorage.setItem(EDITS_KEY, JSON.stringify(edits));
+  }
+
+  function editKey(zone, cardId, idx) {
+    return zone + ':' + cardId + ':' + idx;
+  }
+
+  function makeEditable(card) {
+    card.querySelectorAll(EDITABLE_SELECTOR).forEach((el, idx) => {
+      el.contentEditable = 'true';
+      el.spellcheck = false;
+      el.addEventListener('blur', () => {
+        const zone = currentZone.contains(card) ? 'current' : 'past';
+        const edits = loadEdits();
+        edits[editKey(zone, card.dataset.cardId, idx)] = el.innerHTML;
+        saveEdits(edits);
+      });
+      el.addEventListener('keydown', e => {
+        if (e.key === 'Enter' && !e.shiftKey && el.matches('.card-title, .card-tag, .owner-chip, .success-label, .mini-card-owner')) {
+          e.preventDefault();
+          el.blur();
+        }
+      });
+    });
+  }
+
+  function applyEdits(card, zone) {
+    const edits = loadEdits();
+    card.querySelectorAll(EDITABLE_SELECTOR).forEach((el, idx) => {
+      const v = edits[editKey(zone, card.dataset.cardId, idx)];
+      if (v !== undefined) el.innerHTML = v;
+    });
+  }
+
+  [currentZone, pastZone].forEach(zone => {
+    zone.addEventListener('dragover', e => {
+      e.preventDefault();
+      const fromCurrent = dragged && currentZone.contains(dragged);
+      e.dataTransfer.dropEffect = (zone === currentZone && !fromCurrent) ? 'copy' : 'move';
+      zone.classList.add('drop-active');
+    });
+    zone.addEventListener('dragleave', e => {
+      if (!zone.contains(e.relatedTarget)) zone.classList.remove('drop-active');
+    });
+    zone.addEventListener('drop', e => {
+      e.preventDefault();
+      zone.classList.remove('drop-active');
+      if (!dragged) return;
+
+      const fromCurrent = currentZone.contains(dragged);
+      const id = dragged.dataset.cardId;
+
+      if (zone === currentZone) {
+        if (fromCurrent) {
+          currentZone.appendChild(dragged);
+        } else {
+          const existing = currentZone.querySelector('.card[data-card-id="' + id + '"]');
+          if (existing) {
+            currentZone.appendChild(existing);
+          } else {
+            currentZone.appendChild(makeClone(dragged));
+          }
+        }
+      } else if (zone === pastZone && fromCurrent) {
+        dragged.remove();
+      }
+
+      updateEmptyState();
+      persist();
+    });
+  });
+
+  function updateEmptyState() {
+    const empty = currentZone.querySelector('[data-empty]');
+    const hasCards = currentZone.querySelector('.card');
+    if (empty) empty.style.display = hasCards ? 'none' : '';
+  }
+
+  function persist() {
+    const ids = Array.from(currentZone.querySelectorAll('.card')).map(c => c.dataset.cardId);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(ids));
+  }
+
+  function initCollapse() {
+    const pastWeek = document.querySelector('.past-week');
+    const toggle = pastWeek && pastWeek.querySelector('.past-week-toggle');
+    if (!toggle) return;
+    setCollapsed(localStorage.getItem(COLLAPSE_KEY) === 'true');
+    toggle.addEventListener('click', () => {
+      setCollapsed(!pastWeek.classList.contains('collapsed'));
+    });
+    function setCollapsed(yes) {
+      pastWeek.classList.toggle('collapsed', yes);
+      toggle.setAttribute('aria-expanded', String(!yes));
+      const label = toggle.querySelector('.toggle-label');
+      if (label) label.textContent = yes ? 'Show' : 'Hide';
+      localStorage.setItem(COLLAPSE_KEY, String(yes));
+    }
+  }
+})();
+</script>
 <script src="agentation-bundle.js" defer></script>
 </body>
 </html>
